@@ -6,10 +6,11 @@
 + Set of complex numbers (real + imaginary numbers)
 ```
 Mindmap based on [The Mandelbrot Set - Numberphile](https://www.youtube.com/watch?v=NGMRB4O922I) (shinckel, 2023)
-![mi<img width="956" alt="Screenshot 2023-06-09 at 4 37 00 PM" src="https://github.com/shinckel/fract-ol/assets/115558344/b890a5a1-feee-4c73-8c99-f3455ef302bc">
+![mind-map_fract-ol1](https://github.com/shinckel/fract-ol/assets/115558344/116f065e-a405-4261-95a3-eb6124f5c6e1)
 
-nd-map_fract-ol1](https://github.com/shinckel/fract-ol/assets/115558344/78a00e6a-77c9-464b-ba74-f3df4956aaa8)
-
+Graph from [Geogebra, author Ben Sparks](https://www.geogebra.org/m/BUVhcRSv#material/Npd3kBKn)
+"Stable orbits are coloured black. The colours 'outside' the set are determined by how quickly the iteration diverges..."
+<img width="931" alt="Screenshot 2023-06-09 at 4 39 46 PM" src="https://github.com/shinckel/fract-ol/assets/115558344/17ff352b-6b10-4576-98d4-47d550d81e3c">
 
 ## Project Description
 - This project is about creating a small fractal exploration program. First, you have to know what a fractal is.
