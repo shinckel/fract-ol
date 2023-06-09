@@ -5,6 +5,8 @@
 + Leaf, trees, cauliflower, bronchial system, coast line
 + Set of complex numbers (real + imaginary numbers)
 ```
+Mindmap based on [link](https://www.youtube.com/watch?v=NGMRB4O922I)
+![mind-map_fract-ol1](https://github.com/shinckel/fract-ol/assets/115558344/b5ba7003-2cb1-4db0-a9c8-e9a632d0e174)
 
 ## Project Description
 - This project is about creating a small fractal exploration program. First, you have to know what a fractal is.
