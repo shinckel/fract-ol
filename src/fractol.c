@@ -1,13 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_fractol.c                                       :+:      :+:    :+:   */
+/*   fractol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:05:53 by shinckel          #+#    #+#             */
-/*   Updated: 2023/06/08 14:06:10 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/06/08 15:41:54 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// mandatory -> Mandelbrot set
+#include "fractol.h"
+// 1st mandatory -> Mandelbrot set
+// 2nd mandatory -> Julia set
+// Turtle
+// Island
+// Xquartz
+
