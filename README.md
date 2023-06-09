@@ -7,7 +7,7 @@ This project was developed for 42 school. For comprehensive information regardin
 + Set of complex numbers (real + imaginary numbers)
 ```
 _Mindmap based on [The Mandelbrot Set - Numberphile](https://www.youtube.com/watch?v=NGMRB4O922I) (shinckel, 2023)_
-![mind-map_fract-ol1](https://github.com/shinckel/fract-ol/assets/115558344/8defe75f-a496-430f-a00a-eeb4680f1eb2)
+![mind-map_fract-ol1](https://github.com/shinckel/fract-ol/assets/115558344/6460fe52-78fb-4b4a-ba43-fe2fb04229d8)
 
 _Graph from [Geogebra, author Ben Sparks](https://www.geogebra.org/m/BUVhcRSv#material/Npd3kBKn).
 "Simple exploration of the Mandelbrot Set (and the orbits of the iteration with different 'c' values). Stable orbits are coloured black. The colours 'outside' the set are determined by how quickly the iteration diverges..."_
