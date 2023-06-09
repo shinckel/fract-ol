@@ -1,4 +1,5 @@
 # Fract-ol
+This project was developed for 42 school. For comprehensive information regarding the requirements, please consult the PDF file in the subject folder of the repository. Furthermore, I have provided my notes and a concise summary below.
 ``` diff
 + Similar repeated patterns
 + Similarity occurs at different scales
