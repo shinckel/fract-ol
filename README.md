@@ -3,7 +3,7 @@
 + Similar repeated patterns
 + Similarity occurs at different scales
 + Leaf, trees, cauliflower, bronchial system, coast line
-+ Set of complex numbers, imaginary numbers
++ Set of complex numbers (real + imaginary numbers)
 ```
 
 ## Project Description
