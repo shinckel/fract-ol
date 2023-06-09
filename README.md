@@ -6,7 +6,10 @@
 + Set of complex numbers (real + imaginary numbers)
 ```
 Mindmap based on [The Mandelbrot Set - Numberphile](https://www.youtube.com/watch?v=NGMRB4O922I) (shinckel, 2023)
-![mind-map_fract-ol1](https://github.com/shinckel/fract-ol/assets/115558344/78a00e6a-77c9-464b-ba74-f3df4956aaa8)
+![mi<img width="956" alt="Screenshot 2023-06-09 at 4 37 00 PM" src="https://github.com/shinckel/fract-ol/assets/115558344/b890a5a1-feee-4c73-8c99-f3455ef302bc">
+
+nd-map_fract-ol1](https://github.com/shinckel/fract-ol/assets/115558344/78a00e6a-77c9-464b-ba74-f3df4956aaa8)
+
 
 ## Project Description
 - This project is about creating a small fractal exploration program. First, you have to know what a fractal is.
