@@ -5,7 +5,7 @@
 + Leaf, trees, cauliflower, bronchial system, coast line
 + Set of complex numbers (real + imaginary numbers)
 ```
-Mindmap based on [The Mandelbrot Set - Numberphile(2014)](https://www.youtube.com/watch?v=NGMRB4O922I) (shinckel, 2023)
+Mindmap based on [The Mandelbrot Set - Numberphile](https://www.youtube.com/watch?v=NGMRB4O922I) (shinckel, 2023)
 ![mind-map_fract-ol1](https://github.com/shinckel/fract-ol/assets/115558344/9bf07aba-88ff-4e58-990b-63bdf64fba12)
 
 ## Project Description
