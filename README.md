@@ -1,7 +1,7 @@
 # Fract-ol
 This project was developed for 42 school. For comprehensive information regarding the requirements, please consult the PDF file in the subject folder of the repository. Furthermore, I have provided my notes and a concise summary below.
 ``` diff
-+ Similar repeated patterns
++ Keywords: Similar repeated patterns
 + Similarity occurs at different scales
 + Leaf, trees, cauliflower, bronchial system, coast line
 + Set of complex numbers (real + imaginary numbers)
