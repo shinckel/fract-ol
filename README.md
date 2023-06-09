@@ -14,7 +14,7 @@ _Graph from [Geogebra, author Ben Sparks](https://www.geogebra.org/m/BUVhcRSv#ma
 <img width="931" alt="Screenshot 2023-06-09 at 4 39 46 PM" src="https://github.com/shinckel/fract-ol/assets/115558344/17ff352b-6b10-4576-98d4-47d550d81e3c">
 
 ## High-level Overview
-By iterating the formula $(z = z^2 + c)$ and evaluating the behavior of the resulting complex numbers, it is possible to classify each pixel on the canvas as either part of the Mandelbrot set (bounded) or not (escaped).
+By iterating the formula $z = z^2 + c$ and evaluating the behavior of the resulting complex numbers, it is possible to classify each pixel on the canvas as either part of the Mandelbrot set (bounded) or not (escaped).
 
 ## Concepts
 
