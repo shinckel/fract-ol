@@ -22,4 +22,6 @@
 - Clicking on the cross on the window’s frame must close the window and quit the program in a clean way.
 - The use of the images of the MiniLibX is mandatory.
 
+## High-level Overview
+
 ## Concepts

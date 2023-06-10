@@ -1,23 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol.h                                          :+:      :+:    :+:   */
+/*   canvas.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/08 14:18:55 by shinckel          #+#    #+#             */
-/*   Updated: 2023/06/10 11:47:11 by shinckel         ###   ########.fr       */
+/*   Created: 2023/06/10 11:38:03 by shinckel          #+#    #+#             */
+/*   Updated: 2023/06/10 12:07:18 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FRACTOL_H
-# define FRACTOL_H
+#include "fractol.h"
 
-#include "../minilibx-linux/mlx.h"
-# include <stdlib.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <math.h>
-# include <string.h>
-
-#endif
