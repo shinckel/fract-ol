@@ -4,8 +4,7 @@ This project was developed for 42 school. For comprehensive information regardin
 + Keywords: Similar repeated patterns
 + Similarity occurs at different scales
 + Leaf, trees, cauliflower, bronchial system, coast line
-+ Set of complex numbers $a + bi$ 
-+ $f_{c}(z) = z^2 + c$
++ Set of complex numbers (real + imaginary)
 ```
 _Mindmap based on [The Mandelbrot Set - Numberphile](https://www.youtube.com/watch?v=NGMRB4O922I) (shinckel, 2023)_
 ![mind-map_fract-ol1](https://github.com/shinckel/fract-ol/assets/115558344/2ab02efd-7e0a-4ee9-90f2-67190a281f34)
