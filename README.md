@@ -20,7 +20,7 @@ _Visualization of the Mandelbrot and Julia iteration, made by Stefan Bion [Click
 ## High-level Overview
 By iterating the formula $f_{c}(z) = z^2 + c$ and evaluating the behavior of the resulting complex numbers, it is possible to classify each pixel on the canvas as either part of the Mandelbrot set (bounded) or not (escaped).
 
-Distance Estimator algorithm [Click here](http://mrob.com/pub/muency/distanceestimator.html)
+_Distance Estimator algorithm [Click here](http://mrob.com/pub/muency/distanceestimator.html)_
 ```c
 function  distance_estimator
       param(c)  :  complex
