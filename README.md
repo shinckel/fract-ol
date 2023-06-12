@@ -14,7 +14,7 @@ _Graph from [Geogebra, author Ben Sparks](https://www.geogebra.org/m/BUVhcRSv#ma
 "Simple exploration of the Mandelbrot Set (and the orbits of the iteration with different 'c' values). Stable orbits are coloured black. The colours 'outside' the set are determined by how quickly the iteration diverges..."_
 <img width="931" alt="Screenshot 2023-06-09 at 4 39 46 PM" src="https://github.com/shinckel/fract-ol/assets/115558344/17ff352b-6b10-4576-98d4-47d550d81e3c">
 
-_Visualization of the Mandelbrot and Julia iteration [Click here](https://www.stefanbion.de/fraktal-generator/mandeliteration.html)_
+_Visualization of the Mandelbrot and Julia iteration [Click here](https://www.stefanbion.de/fraktal-generator/mandeliteration.htm)_
 ![juliaset](https://github.com/shinckel/fract-ol/assets/115558344/ff6bb7db-8d32-45e8-a765-10b30c5ba116)
 
 ## High-level Overview
