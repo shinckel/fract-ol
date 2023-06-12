@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:05:53 by shinckel          #+#    #+#             */
-/*   Updated: 2023/06/10 22:21:32 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/06/12 13:51:10 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@
 
 #include "fractol.h"
 
+int	mandelbrot(t_fractal *fractal)
+{
+
+}
+
 int deal_keys(int keycode, t_fractal *fractal)
 {
 	if (keycode == ESC_KEY)
@@ -27,6 +32,14 @@ int deal_keys(int keycode, t_fractal *fractal)
 	}
 	return (0);
 }
+
+// int	main(int argc, char **argv)
+// {
+// 	if (argc == 2)
+// 	{
+		
+// 	}
+// }
 
 int	main(void)
 {
