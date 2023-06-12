@@ -15,6 +15,7 @@ _Graph from [Geogebra, author Ben Sparks](https://www.geogebra.org/m/BUVhcRSv#ma
 <img width="931" alt="Screenshot 2023-06-09 at 4 39 46 PM" src="https://github.com/shinckel/fract-ol/assets/115558344/17ff352b-6b10-4576-98d4-47d550d81e3c">
 
 _[Visualization of the Mandelbrot iteration $f_{c}(z) = z^2 + c$](https://www.stefanbion.de/fraktal-generator/mandeliteration.htm)_
+![mandelbrotset](https://github.com/shinckel/fract-ol/assets/115558344/0ad295ed-b843-4c35-988f-39bc5aeef7d2)
 ![juliaset](https://github.com/shinckel/fract-ol/assets/115558344/d285eea5-10ca-4f62-9ac9-cd317058b746)
 
 ## High-level Overview
