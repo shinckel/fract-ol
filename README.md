@@ -14,11 +14,47 @@ _Graph from [Geogebra, author Ben Sparks](https://www.geogebra.org/m/BUVhcRSv#ma
 "Simple exploration of the Mandelbrot Set (and the orbits of the iteration with different 'c' values). Stable orbits are coloured black. The colours 'outside' the set are determined by how quickly the iteration diverges..."_
 <img width="931" alt="Screenshot 2023-06-09 at 4 39 46 PM" src="https://github.com/shinckel/fract-ol/assets/115558344/17ff352b-6b10-4576-98d4-47d550d81e3c">
 
-_Visualization of the Mandelbrot and Julia iteration [Click here](https://www.stefanbion.de/fraktal-generator/mandeliteration.htm)_
+_Visualization of the Mandelbrot and Julia iteration, made by Stefan Bion [Click here](https://www.stefanbion.de/fraktal-generator/mandeliteration.htm)_
 ![juliaset](https://github.com/shinckel/fract-ol/assets/115558344/ff6bb7db-8d32-45e8-a765-10b30c5ba116)
 
 ## High-level Overview
 By iterating the formula $f_{c}(z) = z^2 + c$ and evaluating the behavior of the resulting complex numbers, it is possible to classify each pixel on the canvas as either part of the Mandelbrot set (bounded) or not (escaped).
+
+Distance Estimator algorithm [Click here](http://mrob.com/pub/muency/distanceestimator.html)
+```c
+function  distance_estimator
+      param(c)  :  complex
+      param(max_iterations)  :  integer
+      param(escape_radius)  :  real        should  be  2.0  or  larger
+      result:  real
+      begin  function
+            declare  z,  z2,  dz  :  complex
+            declare  iterations  :  integer
+            declare  still_iterating  :  boolean
+             
+            let  still_iterating  =  true
+            let  iterations  =  0
+            let  z  =  c
+            let  dz  =  0
+            let  escape_radius  =  2.0     or  larger  value
+             
+            while  (still_iterating)  do
+                  let  z2  =  z2  +  c
+                  let  dz  =  2  *  z  *  dz  +  1
+                  let  z  =  z2
+                  let  iterations  =  iterations  +  1
+                  if  (magnitude(z)  >  escape_radius)  then
+                        let  still_iterating  =  false
+                  else  if  (iterations  >=  max_iterations)  then
+                        let  still_iterating  =  false
+                  end  if
+            end  while
+             
+            let  z  =  magnitude(z)
+            let  dz  =  magnitude(dz)
+            let  result  =  log(z*z)  *  z  /  dz
+      end  function
+```
 
 ## Concepts
 
