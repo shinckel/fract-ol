@@ -14,7 +14,8 @@ _Graph from [Geogebra, author Ben Sparks](https://www.geogebra.org/m/BUVhcRSv#ma
 "Simple exploration of the Mandelbrot Set (and the orbits of the iteration with different 'c' values). Stable orbits are coloured black. The colours 'outside' the set are determined by how quickly the iteration diverges..."_
 <img width="931" alt="Screenshot 2023-06-09 at 4 39 46 PM" src="https://github.com/shinckel/fract-ol/assets/115558344/17ff352b-6b10-4576-98d4-47d550d81e3c">
 
-- [Visualization of the Mandelbrot iteration $f_{c}(z) = z^2 + c$](https://www.stefanbion.de/fraktal-generator/mandeliteration.htm)
+_[Visualization of the Mandelbrot iteration $f_{c}(z) = z^2 + c$](https://www.stefanbion.de/fraktal-generator/mandeliteration.htm)_
+![juliaset](https://github.com/shinckel/fract-ol/assets/115558344/d285eea5-10ca-4f62-9ac9-cd317058b746)
 
 ## High-level Overview
 By iterating the formula $f_{c}(z) = z^2 + c$ and evaluating the behavior of the resulting complex numbers, it is possible to classify each pixel on the canvas as either part of the Mandelbrot set (bounded) or not (escaped).
