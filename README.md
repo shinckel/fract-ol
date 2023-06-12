@@ -7,7 +7,7 @@ This project was developed for 42 school. For comprehensive information regardin
 + set of complex numbers (real + imaginary)
 + estable iteration
 ```
-_Mindmap based on [The Mandelbrot Set - Numberphile](https://www.youtube.com/watch?v=NGMRB4O922I) (shinckel, 2023)_
+_Mindmaps (shinckel, 2023)_
 ![mind-map_fract-ol1](https://github.com/shinckel/fract-ol/assets/115558344/2ab02efd-7e0a-4ee9-90f2-67190a281f34)
 
 _Graph from [Geogebra, author Ben Sparks](https://www.geogebra.org/m/BUVhcRSv#material/Npd3kBKn).
