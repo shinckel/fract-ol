@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:05:53 by shinckel          #+#    #+#             */
-/*   Updated: 2023/06/12 13:51:10 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/06/12 23:12:44 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@
 
 int	mandelbrot(t_fractal *fractal)
 {
+	int	max_iteration;
 
+	max_iteration = 200;
 }
 
 int deal_keys(int keycode, t_fractal *fractal)
