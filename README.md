@@ -18,43 +18,27 @@ _Visualization of the Mandelbrot and Julia iteration, made by Stefan Bion [Click
 ![juliaset](https://github.com/shinckel/fract-ol/assets/115558344/ff6bb7db-8d32-45e8-a765-10b30c5ba116)
 
 ## High-level Overview
-By iterating the formula $f_{c}(z) = z^2 + c$ and evaluating the behavior of the resulting complex numbers, it is possible to classify each pixel on the canvas as either part of the Mandelbrot set (bounded) or not (escaped).
 
-_Distance Estimator algorithm [Click here](http://mrob.com/pub/muency/distanceestimator.html)_
-```c
-function  distance_estimator
-      param(c)  :  complex
-      param(max_iterations)  :  integer
-      param(escape_radius)  :  real        should  be  2.0  or  larger
-      result:  real
-      begin  function
-            declare  z,  z2,  dz  :  complex
-            declare  iterations  :  integer
-            declare  still_iterating  :  boolean
-             
-            let  still_iterating  =  true
-            let  iterations  =  0
-            let  z  =  c
-            let  dz  =  0
-            let  escape_radius  =  2.0     or  larger  value
-             
-            while  (still_iterating)  do
-                  let  z2  =  z2  +  c
-                  let  dz  =  2  *  z  *  dz  +  1
-                  let  z  =  z2
-                  let  iterations  =  iterations  +  1
-                  if  (magnitude(z)  >  escape_radius)  then
-                        let  still_iterating  =  false
-                  else  if  (iterations  >=  max_iterations)  then
-                        let  still_iterating  =  false
-                  end  if
-            end  while
-             
-            let  z  =  magnitude(z)
-            let  dz  =  magnitude(dz)
-            let  result  =  log(z*z)  *  z  /  dz
-      end  function
-```
+- The Mandelbrot set, denoted M, is the set of complex numbers `c` such that the critical point `z = 0` of the polynomial P(z)=z2+c $P(z) = z^2 + c$ has an orbit that is not attracted to infinity.
+- By iterating the formula $f_{c}(z) = z^2 + c$ and evaluating the behavior of the resulting complex numbers, it is possible to classify each pixel on the canvas as either part of the Mandelbrot set (bounded) or not (escaped).
+- Theorem: The orbit of 0 tends to infinity if and only if at some point it has modulus >2.
+
+1. Choose a maximal iteration number N;
+2. For each pixel p of the image:
+		Let c be the complex number represented by p
+		Let z be a complex variable
+		Set z to 0
+3. Do the following N times:    
+		If |z|>2 then color the pixel white, end this loop prematurely, go to the next pixel
+		Otherwise replace z by z*z+c
+4. If the loop above reached its natural end: color the pixel p in black
+5. Go to the next pixel
+
+References: 
+[Math University Toulouse](https://www.math.univ-toulouse.fr/~cheritat/wiki-draw/index.php/Mandelbrot_set#Basic_algorithm)
+[WikiBooks](https://en.wikibooks.org/wiki/Fractals#Introduction)
+[The Nature of Code, chapter 8](https://natureofcode.com/book/chapter-8-fractals/)
+[Distance Estimator algorithm](http://mrob.com/pub/muency/distanceestimator.html)
 
 ## Concepts
 
@@ -66,3 +50,4 @@ function  distance_estimator
 | **`Create canvas`** | `mlx_init()` `mlx_new_window()` `mlx_loop()` | initializes the MiniLibX library and assigns the mlx(connection with the graphical server); creates a new window using the specified width, height, and name, and assigns the window pointer to `fractal.win`; enters the event loop of MiniLibX, which continuously listens for events such as key presses and mouse movements. This function call will keep the program running until the window is closed |
 |**`put some color`**|  `for (int x = 0; x < fractal.width; x++) { for (int y = 0; y < fractal.height; y++) { mlx_pixel_put(fractal.mlx, fractal.win, x, y, bg_color); } }` | manage the color pixel per pixel: `graphical server` - `window pointer` - `x/y coordinates` - `color` |
 | **`handling events`** | `mlx_key_hook(fractal.win, deal_keys, (void *)0);` |  |
+| **`scanline methods`**| | (a.k.a. raster scan) all pixels in the image will be scanned. For each pixel, the color has to be determined. The coordinates of the pixel are converted into mathematical parameters. Then an algorithm is run on that parameter |
