@@ -32,7 +32,7 @@ The Mandelbrot set, denoted M, is the set of complex numbers `c` such that the c
 4. If the loop above reached its natural end: color the pixel p in black
 5. Go to the next pixel
 
-References: 
+**References:** <br /> 
 [Math University Toulouse](https://www.math.univ-toulouse.fr/~cheritat/wiki-draw/index.php/Mandelbrot_set#Basic_algorithm) <br />
 [WikiBooks](https://en.wikibooks.org/wiki/Fractals#Introduction) <br />
 [The Nature of Code, chapter 8](https://natureofcode.com/book/chapter-8-fractals/) <br />
