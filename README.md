@@ -33,10 +33,10 @@ The Mandelbrot set, denoted M, is the set of complex numbers `c` such that the c
 5. Go to the next pixel
 
 References: 
-[Math University Toulouse](https://www.math.univ-toulouse.fr/~cheritat/wiki-draw/index.php/Mandelbrot_set#Basic_algorithm)
-[WikiBooks](https://en.wikibooks.org/wiki/Fractals#Introduction)
-[The Nature of Code, chapter 8](https://natureofcode.com/book/chapter-8-fractals/)
-[Distance Estimator algorithm](http://mrob.com/pub/muency/distanceestimator.html)
+[Math University Toulouse](https://www.math.univ-toulouse.fr/~cheritat/wiki-draw/index.php/Mandelbrot_set#Basic_algorithm)__
+[WikiBooks](https://en.wikibooks.org/wiki/Fractals#Introduction)__
+[The Nature of Code, chapter 8](https://natureofcode.com/book/chapter-8-fractals/)__
+[Distance Estimator algorithm](http://mrob.com/pub/muency/distanceestimator.html)__
 
 ## Concepts
 
