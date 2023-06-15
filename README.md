@@ -19,9 +19,7 @@ _Visualization of the Mandelbrot and Julia iteration, made by Stefan Bion [Click
 
 ## High-level Overview
 
-- The Mandelbrot set, denoted M, is the set of complex numbers `c` such that the critical point `z = 0` of the polynomial P(z)=z2+c $P(z) = z^2 + c$ has an orbit that is not attracted to infinity.
-- By iterating the formula $f_{c}(z) = z^2 + c$ and evaluating the behavior of the resulting complex numbers, it is possible to classify each pixel on the canvas as either part of the Mandelbrot set (bounded) or not (escaped).
-- Theorem: The orbit of 0 tends to infinity if and only if at some point it has modulus >2.
+The Mandelbrot set, denoted M, is the set of complex numbers `c` such that the critical point `z = 0` of the polynomial P(z)=z2+c $P(z) = z^2 + c$ has an orbit that is not attracted to infinity. By iterating the formula $f_{c}(z) = z^2 + c$ and evaluating the behavior of the resulting complex numbers, it is possible to classify each pixel on the canvas as either part of the Mandelbrot set (bounded) or not (escaped). **Theorem: The orbit of 0 tends to infinity if and only if at some point it has modulus >2.**
 
 1. Choose a maximal iteration number N;
 2. For each pixel p of the image:
