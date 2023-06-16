@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:18:55 by shinckel          #+#    #+#             */
-/*   Updated: 2023/06/13 01:22:05 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/06/15 14:08:49 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,22 @@
 #define HUGE 100000.0
 
 typedef struct s_fractal {
-	char		*name;
-	void		*img;
-	void		*addr;
-	int			bits_per_pixel;
-	int			line_length;
-	int			endian;
+
 	void		*mlx;
 	void		*win;
-	
 	int			width;
 	int			height;
-	double		zoom;
-
+	double		min_x;
+	double		max_x;
+	double		min_y;
+	double		max_y;
+	double		step_x;
+	double		step_y;
 	double		cx;
 	double		cy;
+
+	double		zoom;
+
 	double		x2;
 	double		y2;
 	double		tmp;
@@ -50,6 +51,12 @@ typedef struct s_fractal {
 	double		radius;
 	int			iterations;
 	int			color;
+
+	void		*img;
+	void		*addr;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
 }				t_fractal;
 
 int 	deal_keys(int keycode, t_fractal *fractal);

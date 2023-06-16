@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:05:53 by shinckel          #+#    #+#             */
-/*   Updated: 2023/06/12 23:12:44 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/06/15 14:12:17 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,30 +18,31 @@
 
 #include "fractol.h"
 
-int	mandelbrot(t_fractal *fractal)
+// width = 600px -> for each pixel in the x-direction, the x-value in the complex plane should change by approximately 0.0066666667
+void	map_screen(t_fractal *fractal)
 {
-	int	max_iteration;
+	int	x;
+	int	y;
 
-	max_iteration = 200;
-}
-
-int deal_keys(int keycode, t_fractal *fractal)
-{
-	if (keycode == ESC_KEY)
+	x = 0;
+	y = 0;
+	fractal->min_x = -2.0;
+	fractal->max_x = 2.0;
+	fractal->min_y = -2.0;
+	fractal->max_y = 2.0;
+	fractal->step_x = (fractal->max_x - fractal->min_x) / fractal->width;
+	fractal->step_y = (fractal->max_y - fractal->min_y) / fractal->height;
+	while (x <= fractal->width)
 	{
-		mlx_destroy_window(fractal->mlx, fractal->win);
-		exit(1);
+		while (y <= fractal->height)
+		{
+			fractal->cx = ;
+			fractal->cy = ;
+			y++;
+		}
+		x++;
 	}
-	return (0);
 }
-
-// int	main(int argc, char **argv)
-// {
-// 	if (argc == 2)
-// 	{
-		
-// 	}
-// }
 
 int	main(void)
 {
@@ -49,7 +50,6 @@ int	main(void)
 
 	fractal.width = 600;
 	fractal.height = 800;
-	fractal.name = "Sofia";
 	int bg_color = 0xFFC0CB;
 
 	fractal.mlx = mlx_init();
@@ -57,7 +57,7 @@ int	main(void)
 		printf("Failed to initialize MiniLibX.\n");
 		return (1);
 	}
-	fractal.win = mlx_new_window(fractal.mlx, fractal.width, fractal.height, fractal.name);
+	fractal.win = mlx_new_window(fractal.mlx, fractal.width, fractal.height, "fract-ol");
 	for (int x = 0; x < 50; x++)
 	{
 		for (int y = 0; y < 50; y++)
