@@ -55,6 +55,6 @@ The Mandelbrot set, denoted M, is the set of complex numbers `c` such that the c
 | **`Theorem`** | `The orbit of 0 tends to infinity if and only if at some point it has modulus >2` | the modulus of a complex number measures its distance from the origin (0, 0) in the complex plane. Mathematically, if $z = a + bi$, where $a$ is the real part and $b$ is the imaginary part, then the modulus(a.k.a. magnitude) $z$ is given by $sqrt(a^2 + b^2)$. **If there exists a value in the orbit whose distance from the origin exceeds 2, then the orbit will eventually escape to infinity.** modulus of $z$: $\sqrt{3^2 + 4^2} = \sqrt{9 + 16} = \sqrt{25} = 5$ |
 | modulus of $z = \sqrt(a^2 + b^2)$ | `zx * zx + zy * zy > 4.0` | let's say `z = 3 + 2i` | 
 | $f_{c}(z) = z^2 + c$ | $(x^2 - y^2) + (2xy)i + (c_re + c_imi)$ | in the complex plane, `x` is the real axis, therefore the real component of `z`, and `y` is the imaginary axis, the imaginary component of `z`. To calculate `zx`, I will extract the first part of the formula: `fractal->zx_new = zx * zx - zy * zy + fractal->cx;`, and for `zy`: `fractal->zy_new = 2 * zx * zy + fractal->cy;` |
-| modulus of $z = sqrt(a^2 + b^2) > 2$ | `zx * zx + zy * zy > 4.0` | in such format, I don't need the $\sqrt$ as anything bigger than $4$ will have the square root bigger than $2$, as $\sqrt{4} = 2$ |
+| modulus of $z = sqrt(a^2 + b^2) > 2$ | `zx * zx + zy * zy > 4.0` | in such format, I don't need to calculate the square root of $(a^2 + b^2)$ as anything bigger than $4$ will have the square root bigger than $2$, as $\sqrt{4} = 2$ |
 
 
