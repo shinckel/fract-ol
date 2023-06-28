@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:05:53 by shinckel          #+#    #+#             */
-/*   Updated: 2023/06/28 16:40:16 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/06/28 21:40:59 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,60 +16,83 @@
 
 // adjust the complex plane to match the aspect ratio of the window
 // where will be the coordinates x and y? what is the size of each unit?
-void	aspect_ratio(t_fractal *fractal)
-{
-	double	diff;
-	double	range_y;
-	double	range_x;
 
-	range_x = (fractal->max_x - fractal->min_x);
-	range_y = (fractal->max_y - fractal->min_y);
-	fractal->win_ratio = fractal->width / fractal->height;
-	fractal->plane_ratio = range_x / range_y;
-    if (fractal->win_ratio > fractal->plane_ratio)
-	{
-        fractal->plane_width = range_y * fractal->win_ratio;
-        diff = (fractal->plane_width - range_x) / 2;
-        fractal->min_x -= diff;
-        fractal->max_x += diff;
-    } else {
-        fractal->plane_height = range_x / fractal->win_ratio;
-        diff = (fractal->plane_height - range_y) / 2;
-        fractal->min_y -= diff;
-        fractal->max_y += diff;
-    }
-    fractal->unit_x = (fractal->max_x - fractal->min_x) / fractal->width;
-    fractal->unit_y = (fractal->max_y - fractal->min_y) / fractal->height;
-}
+
+// void	put_some_color(t_fractal *fractal, int inter, int x, int y)
+// {
+// 	if (inter < 10)
+// 	{
+
+// 	}
+// }
 
 // set cx and cy to the complex plane pixels
 // iterate over the complex variable zx and zy until max_iterations
 void	mandelbrot(t_fractal *fractal, int x, int y)
 {
-	double zx;
-    double zy;
-    int iter;
+	// double zx;
+    // double zy;
+    // int iter;
 	
-	fractal->cx = fractal->min_x + fractal->unit_x * x;
-            fractal->cy = fractal->min_y + fractal->unit_y * y;
-	zx = 0.0;
-	zy = 0.0;
-	iter = 0;
-	while (iter < fractal->max_iter)
+	// fractal->cx = fractal->min_x + fractal->unit_x * x;
+    //         fractal->cy = fractal->min_y + fractal->unit_y * y;
+	// zx = 0.0;
+	// zy = 0.0;
+	// iter = 0;
+	// while (iter < fractal->max_iter)
+	// {
+	// 	fractal->zx_new = zx * zx - zy * zy + fractal->cx;
+	// 	fractal->zy_new = 2 * zx * zy + fractal->cy;
+	// 	zx = fractal->zx_new;
+	// 	zy = fractal->zy_new;
+	// 	if (zx * zx + zy * zy > 4.0)
+	// 	{
+	// 		if (iter > 10)
+	// 		{
+	// 			mlx_pixel_put(fractal->mlx, fractal->win, x, y, 0x370926 * iter);
+	// 			break ;
+	// 		}
+	// 		if (iter > 20)
+	// 		{
+	// 			mlx_pixel_put(fractal->mlx, fractal->win, x, y, 0xFF595E * iter);
+	// 			break ;
+	// 		}
+	// 		if (iter > 30)
+	// 		{
+	// 			mlx_pixel_put(fractal->mlx, fractal->win, x, y, 0x1C0118 * iter);
+	// 			break ;
+	// 		}
+	// 		mlx_pixel_put(fractal->mlx, fractal->win, x, y, 0xFF595E * iter);
+	// 		break ;
+	// 	}
+	// 	iter++;
+	// }
+	// if (iter == fractal->max_iter)
+	// 	mlx_pixel_put(fractal->mlx, fractal->win, x, y, 0x42113C);
+
+	int		i;
+	double	z0;
+	double	z1;
+	double	tempz0;
+
+	i = 0;
+	fractal->cx = (x + fractal->xarrow) / fractal->zoom
+		* (0.47 + 2.0) / (fractal->width - 1) - 2.0;
+	fractal->cy = (y + fractal->yarrow) /fractal->zoom
+		* (1.12 + 1.12) / (fractal->width - 1) - 1.12;
+	z0 = fractal->cx;
+	z1 = fractal->cy;
+	while (i++ < fractal->max_iter)
 	{
-		fractal->zx_new = zx * zx - zy * zy + fractal->cx;
-		fractal->zy_new = 2 * zx * zy + fractal->cy;
-		zx = fractal->zx_new;
-		zy = fractal->zy_new;
-		if (zx * zx + zy * zy > 4.0)
+		tempz0 = z0 * z0 - z1 * z1 + fractal->cx;
+		z1 = 2.0 * z0 * z1 + fractal->cy;
+		z0 = tempz0;
+		if (z0 * z0 + z1 * z1 > 4)
 		{
-			mlx_pixel_put(fractal->mlx, fractal->win, x, y, fractal->color);
+			mlx_pixel_put(fractal->mlx, fractal->win, x, y, 0x42113C * i);
 			break ;
 		}
-		iter++;
 	}
-	if (iter == fractal->max_iter)
-		mlx_pixel_put(fractal->mlx, fractal->win, x, y, 0x000000);
 }
 
 void draw_fractal(t_fractal *fractal)
@@ -79,7 +102,6 @@ void draw_fractal(t_fractal *fractal)
 
     x = 0;
 	y = 0;
-    aspect_ratio(fractal);
     while (x < fractal->width)
     {
 		y = 0;

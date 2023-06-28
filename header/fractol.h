@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:18:55 by shinckel          #+#    #+#             */
-/*   Updated: 2023/06/28 11:22:58 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/06/28 20:29:37 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,24 +24,12 @@
 #define ESC_KEY 49
 #define MINILIBX "\e[1;41m Failed to initialize MiniLibX \e[0m \n"
 
-typedef struct imaginary {
-	double	x;
-	double	y;
-}			t_complex;
-
-t_complex	sqr(t_complex a);
-t_complex	add(t_complex a, t_complex b);
-
 typedef struct s_fractal {
 
 	void		*mlx;
 	void		*win;
 	int			width;
 	int			height;
-	double		win_ratio;
-	double		plane_ratio;
-	double		plane_width;
-	double		plane_height;
 	double		min_x;
 	double		max_x;
 	double		min_y;

@@ -6,26 +6,25 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 17:33:54 by shinckel          #+#    #+#             */
-/*   Updated: 2023/06/28 11:24:57 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/06/28 21:43:10 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-// Calculate the aspect ratio of the window and the complex plane
+// Here I am working with a mathematical width of 3
 void	mandelbrot_param(t_fractal *fractal)
 {
 	fractal->width = 720;
 	fractal->height = 720;
 	fractal->min_x = -2.0;
-    fractal->max_x = 2;
+    fractal->max_x = 2.0;
     fractal->min_y = -2.0;
 	fractal->max_y = 2.0;
 	fractal->max_iter = 1000;
 	fractal->zoom = 1;
 	fractal->xarrow = 0;
-	fractal->yarrow = 270;
-	fractal->color = 0xFFFFFF;
+	fractal->yarrow = 0;
 	fractal->name = "Mandelbrot Set";
 }
 
