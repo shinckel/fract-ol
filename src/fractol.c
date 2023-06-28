@@ -6,64 +6,105 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:05:53 by shinckel          #+#    #+#             */
-/*   Updated: 2023/06/15 14:12:17 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/06/28 16:40:16 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// 1st mandatory -> Mandelbrot set
-// 2nd mandatory -> Julia set
-// Turtle
-// Island
-// Xquartz
-
 #include "fractol.h"
 
-// width = 600px -> for each pixel in the x-direction, the x-value in the complex plane should change by approximately 0.0066666667
-void	map_screen(t_fractal *fractal)
-{
-	int	x;
-	int	y;
+//Pickover stalk
 
-	x = 0;
-	y = 0;
-	fractal->min_x = -2.0;
-	fractal->max_x = 2.0;
-	fractal->min_y = -2.0;
-	fractal->max_y = 2.0;
-	fractal->step_x = (fractal->max_x - fractal->min_x) / fractal->width;
-	fractal->step_y = (fractal->max_y - fractal->min_y) / fractal->height;
-	while (x <= fractal->width)
+// adjust the complex plane to match the aspect ratio of the window
+// where will be the coordinates x and y? what is the size of each unit?
+void	aspect_ratio(t_fractal *fractal)
+{
+	double	diff;
+	double	range_y;
+	double	range_x;
+
+	range_x = (fractal->max_x - fractal->min_x);
+	range_y = (fractal->max_y - fractal->min_y);
+	fractal->win_ratio = fractal->width / fractal->height;
+	fractal->plane_ratio = range_x / range_y;
+    if (fractal->win_ratio > fractal->plane_ratio)
 	{
-		while (y <= fractal->height)
-		{
-			fractal->cx = ;
-			fractal->cy = ;
-			y++;
-		}
-		x++;
-	}
+        fractal->plane_width = range_y * fractal->win_ratio;
+        diff = (fractal->plane_width - range_x) / 2;
+        fractal->min_x -= diff;
+        fractal->max_x += diff;
+    } else {
+        fractal->plane_height = range_x / fractal->win_ratio;
+        diff = (fractal->plane_height - range_y) / 2;
+        fractal->min_y -= diff;
+        fractal->max_y += diff;
+    }
+    fractal->unit_x = (fractal->max_x - fractal->min_x) / fractal->width;
+    fractal->unit_y = (fractal->max_y - fractal->min_y) / fractal->height;
 }
 
-int	main(void)
+// set cx and cy to the complex plane pixels
+// iterate over the complex variable zx and zy until max_iterations
+void	mandelbrot(t_fractal *fractal, int x, int y)
+{
+	double zx;
+    double zy;
+    int iter;
+	
+	fractal->cx = fractal->min_x + fractal->unit_x * x;
+            fractal->cy = fractal->min_y + fractal->unit_y * y;
+	zx = 0.0;
+	zy = 0.0;
+	iter = 0;
+	while (iter < fractal->max_iter)
+	{
+		fractal->zx_new = zx * zx - zy * zy + fractal->cx;
+		fractal->zy_new = 2 * zx * zy + fractal->cy;
+		zx = fractal->zx_new;
+		zy = fractal->zy_new;
+		if (zx * zx + zy * zy > 4.0)
+		{
+			mlx_pixel_put(fractal->mlx, fractal->win, x, y, fractal->color);
+			break ;
+		}
+		iter++;
+	}
+	if (iter == fractal->max_iter)
+		mlx_pixel_put(fractal->mlx, fractal->win, x, y, 0x000000);
+}
+
+void draw_fractal(t_fractal *fractal)
+{
+    int x;
+    int y;
+
+    x = 0;
+	y = 0;
+    aspect_ratio(fractal);
+    while (x < fractal->width)
+    {
+		y = 0;
+        while (y < fractal->height)
+        {
+			mandelbrot(fractal, x, y);
+            y++;
+        }
+        x++;
+    }
+}
+
+int main(void)
 {
     t_fractal fractal;
 
-	fractal.width = 600;
-	fractal.height = 800;
-	int bg_color = 0xFFC0CB;
-
-	fractal.mlx = mlx_init();
-	if (!fractal.mlx) {
-		printf("Failed to initialize MiniLibX.\n");
-		return (1);
-	}
-	fractal.win = mlx_new_window(fractal.mlx, fractal.width, fractal.height, "fract-ol");
-	for (int x = 0; x < 50; x++)
-	{
-		for (int y = 0; y < 50; y++)
-			mlx_pixel_put(fractal.mlx, fractal.win, x, y, bg_color);
-	}
-	mlx_key_hook(fractal.win, deal_keys, &fractal);
-	mlx_loop(fractal.mlx);
-	return (0);
+	mandelbrot_param(&fractal);
+    fractal.mlx = mlx_init();
+    if (!fractal.mlx) {
+        write(1, MINILIBX, ft_strlen(MINILIBX));
+        return (1);
+    }
+    fractal.win = mlx_new_window(fractal.mlx, fractal.width, fractal.height, fractal.name);
+    draw_fractal(&fractal);
+    mlx_key_hook(fractal.win, deal_keys, &fractal);
+    mlx_loop(fractal.mlx);
+    return (0);
 }

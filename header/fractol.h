@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:18:55 by shinckel          #+#    #+#             */
-/*   Updated: 2023/06/15 14:08:49 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/06/28 11:22:58 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,15 @@
 # include "../libft/header/libft.h"
 
 #define ESC_KEY 49
-#define MAXITER 1000
-#define HUGE 100000.0
+#define MINILIBX "\e[1;41m Failed to initialize MiniLibX \e[0m \n"
+
+typedef struct imaginary {
+	double	x;
+	double	y;
+}			t_complex;
+
+t_complex	sqr(t_complex a);
+t_complex	add(t_complex a, t_complex b);
 
 typedef struct s_fractal {
 
@@ -31,16 +38,26 @@ typedef struct s_fractal {
 	void		*win;
 	int			width;
 	int			height;
+	double		win_ratio;
+	double		plane_ratio;
+	double		plane_width;
+	double		plane_height;
 	double		min_x;
 	double		max_x;
 	double		min_y;
 	double		max_y;
-	double		step_x;
-	double		step_y;
+	double		unit_x;
+	double		unit_y;
 	double		cx;
 	double		cy;
-
+	double		zx_new;
+	double		zy_new;
+	int			max_iter;
+	int			color;
 	double		zoom;
+	char		*name;
+
+
 
 	double		x2;
 	double		y2;
@@ -49,8 +66,6 @@ typedef struct s_fractal {
 	double		xarrow;
 	double		yarrow;
 	double		radius;
-	int			iterations;
-	int			color;
 
 	void		*img;
 	void		*addr;
@@ -59,7 +74,9 @@ typedef struct s_fractal {
 	int			endian;
 }				t_fractal;
 
+/* initialize params */
+void	mandelbrot_param(t_fractal *fractal);
+/* control hooks */
 int 	deal_keys(int keycode, t_fractal *fractal);
-double	distanceEstimator(t_fractal *fractal);
 
 #endif
