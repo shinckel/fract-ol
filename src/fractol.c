@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:05:53 by shinckel          #+#    #+#             */
-/*   Updated: 2023/06/28 21:40:59 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/06/29 17:24:28 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,119 +14,88 @@
 
 //Pickover stalk
 
-// adjust the complex plane to match the aspect ratio of the window
-// where will be the coordinates x and y? what is the size of each unit?
+// while (iter++ < frac->max_iter)
 
-
-// void	put_some_color(t_fractal *fractal, int inter, int x, int y)
-// {
-// 	if (inter < 10)
-// 	{
-
-// 	}
-// }
+// frac->cx = (x + frac->xarrow) / frac->zoom
+// 	* (0.47 + 2.0) / (frac->width) - 2.0;
+// frac->cy = (y + frac->yarrow) / frac->zoom
+// 	* (1.12 + 1.12) / (frac->width) - 1.12;
 
 // set cx and cy to the complex plane pixels
-// iterate over the complex variable zx and zy until max_iterations
-void	mandelbrot(t_fractal *fractal, int x, int y)
+// total range (but only showing positives)
+// 0 * ((0.47 + 2.0) / 1280) = 0
+// 1280 * ((0.47 + 2.0) / 1280) = 0.47 + 2.0 = 2.47
+// now, with negatives
+// 0 * ((0.47 + 2.0) / 1280) - 2.0 = -2.0
+// 1280 * ((0.47 + 2.0) / 1280) - 2.0 = 0.47
+void	mandelbrot(t_fractal *frac, int x, int y)
 {
-	// double zx;
-    // double zy;
-    // int iter;
-	
-	// fractal->cx = fractal->min_x + fractal->unit_x * x;
-    //         fractal->cy = fractal->min_y + fractal->unit_y * y;
-	// zx = 0.0;
-	// zy = 0.0;
-	// iter = 0;
-	// while (iter < fractal->max_iter)
-	// {
-	// 	fractal->zx_new = zx * zx - zy * zy + fractal->cx;
-	// 	fractal->zy_new = 2 * zx * zy + fractal->cy;
-	// 	zx = fractal->zx_new;
-	// 	zy = fractal->zy_new;
-	// 	if (zx * zx + zy * zy > 4.0)
-	// 	{
-	// 		if (iter > 10)
-	// 		{
-	// 			mlx_pixel_put(fractal->mlx, fractal->win, x, y, 0x370926 * iter);
-	// 			break ;
-	// 		}
-	// 		if (iter > 20)
-	// 		{
-	// 			mlx_pixel_put(fractal->mlx, fractal->win, x, y, 0xFF595E * iter);
-	// 			break ;
-	// 		}
-	// 		if (iter > 30)
-	// 		{
-	// 			mlx_pixel_put(fractal->mlx, fractal->win, x, y, 0x1C0118 * iter);
-	// 			break ;
-	// 		}
-	// 		mlx_pixel_put(fractal->mlx, fractal->win, x, y, 0xFF595E * iter);
-	// 		break ;
-	// 	}
-	// 	iter++;
-	// }
-	// if (iter == fractal->max_iter)
-	// 	mlx_pixel_put(fractal->mlx, fractal->win, x, y, 0x42113C);
+	double	zx;
+	double	zy;
+	int		iter;
+	float	modulus;
+	double	log_iter;
+	double	log_normal;
 
-	int		i;
-	double	z0;
-	double	z1;
-	double	tempz0;
-
-	i = 0;
-	fractal->cx = (x + fractal->xarrow) / fractal->zoom
-		* (0.47 + 2.0) / (fractal->width - 1) - 2.0;
-	fractal->cy = (y + fractal->yarrow) /fractal->zoom
-		* (1.12 + 1.12) / (fractal->width - 1) - 1.12;
-	z0 = fractal->cx;
-	z1 = fractal->cy;
-	while (i++ < fractal->max_iter)
+	iter = 0;
+	zx = 0.0;
+	zy = 0.0;
+	frac->cx = x * ((0.47 + 2.0) / frac->width) - 2.0;
+	frac->cy = y * ((1.12 + 1.12) / frac->height) - 1.12;
+	while (iter++ < frac->max_iter)
 	{
-		tempz0 = z0 * z0 - z1 * z1 + fractal->cx;
-		z1 = 2.0 * z0 * z1 + fractal->cy;
-		z0 = tempz0;
-		if (z0 * z0 + z1 * z1 > 4)
+		frac->zx_new = zx * zx - zy * zy + frac->cx;
+		frac->zy_new = 2 * zx * zy + frac->cy;
+		modulus = sqrt(zx * zx + zy * zy);
+		zx = frac->zx_new;
+		zy = frac->zy_new;
+		if (zx * zx + zy * zy > 4.0)
 		{
-			mlx_pixel_put(fractal->mlx, fractal->win, x, y, 0x42113C * i);
+			log_iter = (log(log(modulus))) / log(2.0);
+			log_normal = log_iter / frac->max_iter;
+			int blue = 0x0000FF;
+			int red = 0xFF0000;
+			int color = blue + (int)(log_normal * (red - blue));
+			mlx_pixel_put(frac->mlx, frac->win, x, y, color);
 			break ;
 		}
 	}
 }
 
-void draw_fractal(t_fractal *fractal)
+void	draw_frac(t_fractal *frac)
 {
-    int x;
-    int y;
+	int	x;
+	int	y;
 
-    x = 0;
+	x = 0;
 	y = 0;
-    while (x < fractal->width)
-    {
+	while (x < frac->width)
+	{
 		y = 0;
-        while (y < fractal->height)
-        {
-			mandelbrot(fractal, x, y);
-            y++;
-        }
-        x++;
-    }
+		while (y < frac->height)
+		{
+			mandelbrot(frac, x, y);
+			y++;
+		}
+		x++;
+	}
 }
 
-int main(void)
+int	main(void)
 {
-    t_fractal fractal;
+	t_fractal	frac;
 
-	mandelbrot_param(&fractal);
-    fractal.mlx = mlx_init();
-    if (!fractal.mlx) {
-        write(1, MINILIBX, ft_strlen(MINILIBX));
-        return (1);
-    }
-    fractal.win = mlx_new_window(fractal.mlx, fractal.width, fractal.height, fractal.name);
-    draw_fractal(&fractal);
-    mlx_key_hook(fractal.win, deal_keys, &fractal);
-    mlx_loop(fractal.mlx);
-    return (0);
+	mandelbrot_param(&frac);
+	frac.mlx = mlx_init();
+	if (!frac.mlx)
+	{
+		write(1, MINILIBX, ft_strlen(MINILIBX));
+		return (1);
+	}
+	frac.win = mlx_new_window(frac.mlx, frac.width,
+			frac.height, frac.name);
+	draw_frac(&frac);
+	mlx_key_hook(frac.win, deal_keys, &frac);
+	mlx_loop(frac.mlx);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:18:55 by shinckel          #+#    #+#             */
-/*   Updated: 2023/06/29 11:28:30 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/06/29 14:31:59 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@
 # include "../minilibx-linux/mlx.h"
 # include "../libft/header/libft.h"
 
-# define ESC_KEY 49
+# define ESC_KEY 81
+# define RIGHT_ARROW 39
+# define LEFT_ARROW 37
 # define MINILIBX "\e[1;41m Failed to initialize MiniLibX \e[0m \n"
 
 typedef struct s_fractal {

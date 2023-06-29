@@ -56,6 +56,9 @@ The Mandelbrot set, denoted M, is the set of complex numbers `c` such that the c
 | $f_{c}(z) = z^2 + c$ | $(x^2 - y^2) + (2xy)i + (c_re + c_imi)$ | in the complex plane, `x` is the real axis, therefore the real component of `z`, and `y` is the imaginary axis, the imaginary component of `z`. To calculate `zx`, I will extract the first part of the formula: `fractal->zx_new = zx * zx - zy * zy + fractal->cx;`, and for `zy`: `fractal->zy_new = 2 * zx * zy + fractal->cy;` |
 | modulus of $z = sqrt(a^2 + b^2) > 2$ | `zx * zx + zy * zy > 4.0` | I don't need to calculate the square root of $(a^2 + b^2)$ as any number bigger than $4$ will have the square root bigger than $2$, as $\sqrt{4} = 2$ |
 | **`xarrow`** **`yarrow`** | | position horizontally `xarrow` and vertically `yarrow` relative to the pixel coordinates `x` `y` |
+| **`Mandelbrot boundary`** | $x = (-2.0, 0.47)$ $y = (-1.12, 1.12)$| these are the coordinates of the outer boundary of the mandelbrot set. I can use it as values to establish its size in relation to the screen |
 | **`colors`** | | (wikipedia)[https://en.wikipedia.org/wiki/Plotting_algorithms_for_the_Mandelbrot_set], (Renormalizing the Mandelbrot Escape)[http://linas.org/art-gallery/escape/escape.html] |
+| [42 docs](https://harm-smits.github.io/42docs/libs/minilibx/getting_started.html) | | |
+| **`Smooth Shading`** |  | | 
 
 

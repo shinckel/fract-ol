@@ -6,13 +6,13 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 14:00:19 by shinckel          #+#    #+#             */
-/*   Updated: 2023/06/27 17:32:33 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/06/29 15:55:42 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int deal_keys(int keycode, t_fractal *fractal)
+int	deal_keys(int keycode, t_fractal *fractal)
 {
 	if (keycode == ESC_KEY)
 	{

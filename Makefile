@@ -6,7 +6,7 @@
 #    By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 15:00:40 by shinckel          #+#    #+#              #
-#    Updated: 2023/06/28 10:37:46 by shinckel         ###   ########.fr        #
+#    Updated: 2023/06/29 15:46:04 by shinckel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CFLAGS := -Wall -Wextra -Werror -Iheader -g
 CFLAGS += -I/opt/X11/include
 #CFLAGS += -fsanitize=address
 
-MLXFLAGS = -L ./minilibx-linux -lmlx -Ilmlx -lXext -lX11 -L/usr/X11/lib -L/opt/X11/lib
+MLXFLAGS = -L ./minilibx-linux -lm -lmlx -Ilmlx -lXext -lX11 -L/usr/X11/lib -L/opt/X11/lib
 # to confirm... do I need this flag?
 MLXFLAGS += -L/opt/X11/lib
 
