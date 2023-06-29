@@ -6,7 +6,7 @@
 #    By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 15:00:40 by shinckel          #+#    #+#              #
-#    Updated: 2023/06/10 17:54:10 by shinckel         ###   ########.fr        #
+#    Updated: 2023/06/28 10:37:46 by shinckel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,11 +44,11 @@ $(NAME): $(OBJ)
 
 clean:
 	@rm -f $(OBJ)
-	@echo "$(RED) Clean .o files $(RESET)"
+	@echo "$(RED) Remove objects $(RESET)"
 
 fclean: clean
 	@rm -rf $(NAME)
-	@echo "$(RED) Clean all $(RESET)"
+	@echo "$(RED) Remove objects & $(NAME) $(RESET)"
 
 re: fclean all
 

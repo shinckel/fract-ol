@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:18:55 by shinckel          #+#    #+#             */
-/*   Updated: 2023/06/16 14:24:09 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/06/29 11:28:30 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 # include "../minilibx-linux/mlx.h"
 # include "../libft/header/libft.h"
 
+# define ESC_KEY 49
+# define MINILIBX "\e[1;41m Failed to initialize MiniLibX \e[0m \n"
+
 typedef struct s_fractal {
 
 	void		*mlx;
@@ -31,12 +34,18 @@ typedef struct s_fractal {
 	double		max_x;
 	double		min_y;
 	double		max_y;
-	double		step_x;
-	double		step_y;
+	double		unit_x;
+	double		unit_y;
 	double		cx;
 	double		cy;
-
+	double		zx_new;
+	double		zy_new;
+	int			max_iter;
+	int			color;
 	double		zoom;
+	char		*name;
+
+
 
 	double		x2;
 	double		y2;
@@ -45,8 +54,6 @@ typedef struct s_fractal {
 	double		xarrow;
 	double		yarrow;
 	double		radius;
-	int			iterations;
-	int			color;
 
 	void		*img;
 	void		*addr;
@@ -55,7 +62,9 @@ typedef struct s_fractal {
 	int			endian;
 }				t_fractal;
 
-int 	deal_keys(int keycode, t_fractal *fractal);
-double	distanceEstimator(t_fractal *fractal);
+/* initialize params */
+void	mandelbrot_param(t_fractal *fractal);
+/* control hooks */
+int		deal_keys(int keycode, t_fractal *fractal);
 
 #endif

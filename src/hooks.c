@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 14:00:19 by shinckel          #+#    #+#             */
-/*   Updated: 2023/06/15 14:00:38 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/06/27 17:32:33 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,3 +21,8 @@ int deal_keys(int keycode, t_fractal *fractal)
 	}
 	return (0);
 }
+
+// int deal_keys(int keycode, void *param) {
+//     // Handle key events here
+//     return (0);
+// }
