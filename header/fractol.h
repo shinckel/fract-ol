@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:18:55 by shinckel          #+#    #+#             */
-/*   Updated: 2023/06/15 14:08:49 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/06/16 14:24:09 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,6 @@
 # include <string.h>
 # include "../minilibx-linux/mlx.h"
 # include "../libft/header/libft.h"
-
-#define ESC_KEY 49
-#define MAXITER 1000
-#define HUGE 100000.0
 
 typedef struct s_fractal {
 

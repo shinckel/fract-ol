@@ -1,6 +1,0 @@
-[submodule "minilibx-linux"]
-	path = minilibx-linux
-	url = ./minilibx-linux
-[submodule "libft"]
-	path = libft
-	url = ./libft
