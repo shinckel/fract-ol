@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:18:55 by shinckel          #+#    #+#             */
-/*   Updated: 2023/06/30 10:46:36 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/06/30 23:21:03 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,28 +21,38 @@
 # include "../minilibx-linux/mlx.h"
 # include "../libft/header/libft.h"
 
+// window
+# define WIDTH 720
+# define HEIGHT 720
+// iterations
+# define MAX_ITER 1000
+// hooks
 # define ESC_KEY 81
 # define RIGHT_ARROW 39
 # define LEFT_ARROW 37
-# define MINILIBX "\e[1;41m Failed to initialize MiniLibX \e[0m \n"
+// errors
+# define MINILIBX "\e[1;41m ERROR failed to initialize MiniLibX \e[0m \n"
+# define PARAM "\e[1;41m ERROR write one fractol name: mandelbrot - julia - \e[0m \n"
 
-typedef struct s_fractal {
+typedef struct {
+    unsigned char r;
+    unsigned char g;
+    unsigned char b;
+} color;
+
+typedef struct {
 
 	void		*mlx;
 	void		*win;
 	int			width;
 	int			height;
-	double		min_x;
-	double		max_x;
-	double		min_y;
-	double		max_y;
-	double		unit_x;
-	double		unit_y;
+	double		new1;
+	double		new2;
+
 	double		cx;
 	double		cy;
 	double		zx_new;
 	double		zy_new;
-	int			max_iter;
 	double		outer;
 	double		zoom;
 	char		*name;
@@ -62,11 +72,15 @@ typedef struct s_fractal {
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
-}				t_fractal;
+}	fractal;
 
-/* initialize params */
-void	mandelbrot_param(t_fractal *fractal);
+/* draw fractals */
+color	mandelbrot(fractal *frac, int x, int y);
+color	julia(fractal *frac, int x, int y);
 /* control hooks */
-int		deal_keys(int keycode, t_fractal *fractal);
+int		deal_keys(int keycode, fractal *frac);
+/* colors */
+double	smoothColoring(int iterations, fractal *frac);
+color	getColor(double smoothCount);
 
 #endif
