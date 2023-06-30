@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:18:55 by shinckel          #+#    #+#             */
-/*   Updated: 2023/06/29 14:31:59 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/06/30 10:46:36 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct s_fractal {
 	double		zx_new;
 	double		zy_new;
 	int			max_iter;
-	int			color;
+	double		outer;
 	double		zoom;
 	char		*name;
 

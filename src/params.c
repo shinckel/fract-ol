@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 17:33:54 by shinckel          #+#    #+#             */
-/*   Updated: 2023/06/29 14:08:04 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/06/30 11:52:58 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,5 @@ void	julia_param(t_fractal *frac)
     frac->zoom = 1;
     frac->xarrow = 0;
     frac->yarrow = 0;
-    frac->color = 0xFFFFFF;
     frac->name = "Julia Set";
 }

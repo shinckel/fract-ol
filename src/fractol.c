@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:05:53 by shinckel          #+#    #+#             */
-/*   Updated: 2023/06/29 17:24:28 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/06/30 13:37:11 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,28 @@
 // now, with negatives
 // 0 * ((0.47 + 2.0) / 1280) - 2.0 = -2.0
 // 1280 * ((0.47 + 2.0) / 1280) - 2.0 = 0.47
+
+int	outer_color(t_fractal *frac, double modulus)
+{
+	int		red;
+	int		blue;
+	double	log_iter;
+	double	smooth;
+
+	red = 0xFF0000;
+	blue = 0x0000FF;
+	log_iter = (log(log(modulus))) / log(2.0);
+	smooth = (log_iter / frac->max_iter);
+	frac->outer = blue + (int)(smooth * (red - blue));
+	return (frac->outer);
+}
+
 void	mandelbrot(t_fractal *frac, int x, int y)
 {
 	double	zx;
 	double	zy;
 	int		iter;
-	float	modulus;
-	double	log_iter;
-	double	log_normal;
+	double	modulus;
 
 	iter = 0;
 	zx = 0.0;
@@ -51,12 +65,8 @@ void	mandelbrot(t_fractal *frac, int x, int y)
 		zy = frac->zy_new;
 		if (zx * zx + zy * zy > 4.0)
 		{
-			log_iter = (log(log(modulus))) / log(2.0);
-			log_normal = log_iter / frac->max_iter;
-			int blue = 0x0000FF;
-			int red = 0xFF0000;
-			int color = blue + (int)(log_normal * (red - blue));
-			mlx_pixel_put(frac->mlx, frac->win, x, y, color);
+			mlx_pixel_put(frac->mlx, frac->win, x, y, iter + 1 -
+				log(log(modulus)) / log(2.0));
 			break ;
 		}
 	}

@@ -57,8 +57,7 @@ The Mandelbrot set, denoted M, is the set of complex numbers `c` such that the c
 | modulus of $z = sqrt(a^2 + b^2) > 2$ | `zx * zx + zy * zy > 4.0` | I don't need to calculate the square root of $(a^2 + b^2)$ as any number bigger than $4$ will have the square root bigger than $2$, as $\sqrt{4} = 2$ |
 | **`xarrow`** **`yarrow`** | | position horizontally `xarrow` and vertically `yarrow` relative to the pixel coordinates `x` `y` |
 | **`Mandelbrot boundary`** | $x = (-2.0, 0.47)$ $y = (-1.12, 1.12)$| these are the coordinates of the outer boundary of the mandelbrot set. I can use it as values to establish its size in relation to the screen |
-| **`colors`** | | (wikipedia)[https://en.wikipedia.org/wiki/Plotting_algorithms_for_the_Mandelbrot_set], (Renormalizing the Mandelbrot Escape)[http://linas.org/art-gallery/escape/escape.html] |
+| **`smooth colors`** | $iter + 1 - log(log(sqrt(zx * zx + zy * zy))) / log(2)$ | References: (Plotting algorithms - Wikipedia)[https://en.wikipedia.org/wiki/Plotting_algorithms_for_the_Mandelbrot_set], (Renormalizing the Mandelbrot Escape)[http://linas.org/art-gallery/escape/escape.html], (Mandelbrot Set Coloring Presentation)[https://www.youtube.com/watch?v=r5rDs_qINMg] |
 | [42 docs](https://harm-smits.github.io/42docs/libs/minilibx/getting_started.html) | | |
-| **`Smooth Shading`** |  | | 
 
 
