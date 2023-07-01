@@ -6,37 +6,36 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 20:13:28 by shinckel          #+#    #+#             */
-/*   Updated: 2023/06/30 22:30:42 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/07/01 11:52:58 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-double smoothColoring(int iterations, fractal *frac) 
+double smoothColoring(fractal *frac, double x, double y) 
 {
-    double smoothCount;
+    double smooth;
     double	zx;
 	double	zy;
     double temp;
     int i;
 
 	i = 0;
-	zx = 0.0;
-	zy = 0.0;
-	smoothCount = iterations;
-    while (i < 256)
+	zx = 0.0 + x;
+	zy = 0.0 + y;
+	smooth = MAX_ITER;
+    while (i++ < MAX_ITER)
 	{
         if (zx * zx + zy * zy >= 4.0) {
-            smoothCount = i - log(log(sqrt(zx * zx + zy * zy))) / log(2);
+            smooth = i - log(log(sqrt(zx * zx + zy * zy))) / log(2);
             break;
         }
         temp = zx * zx - zy * zy + frac->cx;
         zy = 2 * zx * zy + frac->cy;
         zx = temp;
-		i++;
     }
 
-    return (smoothCount);
+    return (smooth);
 }
 
 // 25 1 20

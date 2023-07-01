@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:18:55 by shinckel          #+#    #+#             */
-/*   Updated: 2023/06/30 23:21:03 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/07/01 11:40:55 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,6 @@ typedef struct {
 
 	void		*mlx;
 	void		*win;
-	int			width;
-	int			height;
-	double		new1;
-	double		new2;
 
 	double		cx;
 	double		cy;
@@ -80,7 +76,7 @@ color	julia(fractal *frac, int x, int y);
 /* control hooks */
 int		deal_keys(int keycode, fractal *frac);
 /* colors */
-double	smoothColoring(int iterations, fractal *frac);
+double	smoothColoring(fractal *frac, double x, double y);
 color	getColor(double smoothCount);
 
 #endif
