@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 20:13:28 by shinckel          #+#    #+#             */
-/*   Updated: 2023/07/01 11:52:58 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/07/01 19:53:05 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,17 @@ double smoothColoring(fractal *frac, double x, double y)
 color getColor(double smoothCount) 
 {
     color color;
-	
-    color.r = (int)(smoothCount * 25) % 256;
-    color.g = (int)(smoothCount * 1) % 256;
-    color.b = (int)(smoothCount * 20) % 256;
+	//set 1 - pink
+    // color.r = (int)(smoothCount * 25) % 256;
+    // color.g = (int)(smoothCount * 1) % 256;
+    // color.b = (int)(smoothCount * 20) % 256;
+	//set 2 - blue
+	// color.r = (int)((smoothCount) * 1) % 256;
+    // color.g = (int)(log(smoothCount) * 25) % 256;
+    // color.b = (int)((smoothCount) * 15) % 256;
+	//set 3 - black and white
+	color.r = (int)(255 * (1 + cos(2 * M_PI * log(smoothCount) / 13)) / 2);
+    color.g = (int)(255 * (1 + cos(2 * M_PI * log(smoothCount) / 13)) / 2);
+    color.b = (int)(255 * (1 + cos(2 * M_PI * log(smoothCount) / 13)) / 2);
     return (color);
 }
