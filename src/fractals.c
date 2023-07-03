@@ -6,11 +6,33 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 17:33:54 by shinckel          #+#    #+#             */
-/*   Updated: 2023/07/01 19:52:55 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/07/03 11:38:52 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+/*
+double want_aspect = (m_Ymax - m_Ymin) / (m_Xmax - m_Xmin);
+            double picCanvas_aspect = picCanvas.ClientSize.Height / (double)picCanvas.ClientSize.Width;
+if (want_aspect > picCanvas_aspect)
+            {
+                // The selected area is too tall and thin.
+                // Make it wider.
+                wid = (m_Ymax - m_Ymin) / picCanvas_aspect;
+                mid = (m_Xmin + m_Xmax) / 2;
+                m_Xmin = mid - wid / 2;
+                m_Xmax = mid + wid / 2;
+            } else {
+                // The selected area is too short and wide.
+                // Make it taller.
+                hgt = (m_Xmax - m_Xmin) * picCanvas_aspect;
+                mid = (m_Ymin + m_Ymax) / 2;
+                m_Ymin = mid - hgt / 2;
+                m_Ymax = mid + hgt / 2;
+            }
+        }
+*/
 
 color mandelbrot(fractal *frac, int x, int y)
 {
@@ -41,11 +63,11 @@ color julia(fractal *frac, int x, int y)
 	// frac->cx = -0.8;
 	// frac->cy = 0.156;
 	//set 3
-	frac->cx = 0.0;
-	frac->cy = 0.8;
+	// frac->cx = 0.0;
+	// frac->cy = 0.8;
 	//set 4
-	// frac->cx = 0.285;
-	// frac->cy = 0.01;
+	frac->cx = 0.285;
+	frac->cy = 0.01;
 	//set 5
 	// frac->cx = - 0.74543;
 	// frac->cy = 0.11301;

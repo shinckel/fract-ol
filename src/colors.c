@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   colors.c                                           :+:      :+:    :+:   */
+/*   pallete.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 20:13:28 by shinckel          #+#    #+#             */
-/*   Updated: 2023/07/01 19:53:05 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/07/03 11:06:12 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ double smoothColoring(fractal *frac, double x, double y)
 	{
         if (zx * zx + zy * zy >= 4.0) {
             smooth = i - log(log(sqrt(zx * zx + zy * zy))) / log(2);
+			// smooth /= 5.18;
             break;
         }
         temp = zx * zx - zy * zy + frac->cx;
@@ -37,6 +38,45 @@ double smoothColoring(fractal *frac, double x, double y)
 
     return (smooth);
 }
+
+color pallete[] = {
+    {255, 0, 0},   // Red
+    {0, 255, 0},   // Green
+    {0, 0, 255},   // Blue
+    {255, 255, 0}, // Yellow
+    {0, 255, 255}, // Cyan
+    {255, 0, 255}  // Magenta
+    // Add more pallete as needed
+};
+
+/*
+color pallete[] = {
+    {255, 255, 0}, // Yellow
+    {255, 0, 255}  // Magenta
+    // Add more pallete as needed
+};
+*/
+
+// color getColor(double smoothCount)
+// {
+// 	color	color;
+// 	int		clr1;
+// 	int		clr2;
+// 	double	t1;
+// 	double	t2;
+
+// 	printf("%f\n", smoothCount);
+// 	clr1 = (int)smoothCount;
+// 	t2 = smoothCount - clr1;
+// 	t1 = 1 - t2;
+// 	clr1 = clr1 % 6;
+// 	clr2 = (clr1 + 1) % 6;
+// 	color.r = (pallete[clr1].r * t1 + pallete[clr2].r * t2);
+// 	color.g = (pallete[clr1].g * t1 + pallete[clr2].g * t2);
+//     color.b = (pallete[clr1].b * t1 + pallete[clr2].b * t2);
+// 	return (color);
+// }
+
 
 // 25 1 20
 color getColor(double smoothCount) 
