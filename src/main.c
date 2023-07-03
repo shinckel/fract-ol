@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:05:53 by shinckel          #+#    #+#             */
-/*   Updated: 2023/07/03 11:44:24 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/07/03 18:11:53 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@
 // 	return (0);
 // }
 
-void	draw_frac(fractal *frac, char *name)
+void	draw_frac(t_fractal *frac, char *name)
 {
 	int		x;
 	int		y;
 	int		pixel_color;
-	color	color;
+	t_color	color;
 
 	x = 0;
 	y = 0;
@@ -40,7 +40,7 @@ void	draw_frac(fractal *frac, char *name)
 				color = mandelbrot(frac, x, y);
 			else if(!ft_strncmp(name, "julia", 5))
 				color = julia(frac, x, y);
-			pixel_color = (color.r << 16) + (color.g << 8) + color.b;
+			pixel_color = (int)((color.r << 16) + (color.g << 8) + color.b);
 			mlx_pixel_put(frac->mlx, frac->win, x, y, pixel_color);
 			y++;
 		}
@@ -50,8 +50,9 @@ void	draw_frac(fractal *frac, char *name)
 
 int	main(int argc, char **argv) 
 {
-	fractal	frac;
+	t_fractal	frac;
 
+	frac.name = argv[1];
 	if (argc == 2)
 	{
 		frac.mlx = mlx_init();
@@ -61,9 +62,9 @@ int	main(int argc, char **argv)
 			return (1);
 		}
 		frac.win = mlx_new_window(frac.mlx, WIDTH,
-				HEIGHT, argv[1]);
-		draw_frac(&frac, argv[1]);
-		// mlx_key_hook(frac.win, deal_keys, &frac);
+				HEIGHT, frac.name);
+		draw_frac(&frac, frac.name);
+		mlx_key_hook(frac.win, key_hook, &frac);
 		mlx_loop(frac.mlx);
 	}
 	write(1, PARAM, ft_strlen(PARAM));

@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 17:33:54 by shinckel          #+#    #+#             */
-/*   Updated: 2023/07/03 11:50:11 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/07/03 18:07:57 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,26 +34,27 @@ if (want_aspect > picCanvas_aspect)
         }
 */
 
-color mandelbrot(fractal *frac, int x, int y)
+t_color mandelbrot(t_fractal *frac, int x, int y)
 {
 	double	smooth;
-	color	color_effect;
+	t_color	color_effect;
 
+	frac->flag = 1;
 	frac->cx = x * ((0.47 + 2.0) / WIDTH) - 2.0;
 	frac->cy = y * ((1.12 + 1.12) / HEIGHT) - 1.12;
-	smooth = smoothColoring(frac, 0, 0);
-	color_effect = getColor(smooth);
+	smooth = smooth_coloring(frac, 0, 0);
+	color_effect = get_color(smooth, frac->flag);
 	return (color_effect);
 }
 
-color julia(fractal *frac, int x, int y)
+t_color julia(t_fractal *frac, int x, int y)
 {
 	double	smooth;
 	double	xaxis;
 	double	yaxis;
+	t_color	color_effect;
 
-	color	color_effect;
-
+	frac->flag = 2;
 	xaxis = 3 * (x - WIDTH / 2.0) / WIDTH;
     yaxis = 3 * (y - HEIGHT / 2.0) / HEIGHT;
 	//set1
@@ -74,7 +75,7 @@ color julia(fractal *frac, int x, int y)
 	//set 6
 	// frac->cx = 0.355;
 	// frac->cy = 0.355;
-	smooth = smoothColoring(frac, xaxis, yaxis);
-	color_effect = getColor(smooth);
+	smooth = smooth_coloring(frac, xaxis, yaxis);
+	color_effect = get_color(smooth, frac->flag);
 	return (color_effect);
 }

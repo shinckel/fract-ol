@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:18:55 by shinckel          #+#    #+#             */
-/*   Updated: 2023/07/03 11:50:42 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/07/03 18:03:49 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,23 @@
 // iterations
 # define MAX_ITER 1500
 // hooks
-# define ESC_KEY 81
-# define RIGHT_ARROW 39
-# define LEFT_ARROW 37
+# define ESC_KEY 65307
+# define LEFT_ARROW 65361 
+# define RIGHT_ARROW 65363
+# define DOWN 65364 
+# define PLUS 65451
+# define MINUS 65453
 // errors
-# define MINILIBX "\e[1;41m ERROR failed to initialize MiniLibX \e[0m \n"
-# define PARAM "\e[1;41m ERROR write one fractol name: mandelbrot - julia - \e[0m \n"
+# define MINILIBX "\e[1;41m failed to initialize MiniLibX \e[0m \n"
+# define PARAM "\e[1;41m write 1 fractol name: mandelbrot/ julia/ phoenix \e[0m \n"
 
-typedef struct {
-    unsigned char r;
-    unsigned char g;
-    unsigned char b;
-} color;
+typedef struct s_color {
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
+}	t_color;
 
-typedef struct {
+typedef struct s_fractal {
 
 	void		*mlx;
 	void		*win;
@@ -49,11 +52,10 @@ typedef struct {
 	double		cy;
 	double		zx_new;
 	double		zy_new;
-	double		outer;
 	double		zoom;
 	char		*name;
 
-
+	int			flag;
 
 	double		x2;
 	double		y2;
@@ -68,15 +70,16 @@ typedef struct {
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
-}	fractal;
+}	t_fractal;
 
 /* draw fractals */
-color	mandelbrot(fractal *frac, int x, int y);
-color	julia(fractal *frac, int x, int y);
+void	draw_frac(t_fractal *frac, char *name);
+t_color	mandelbrot(t_fractal *frac, int x, int y);
+t_color	julia(t_fractal *frac, int x, int y);
 /* control hooks */
-
+int		key_hook(int keycode, t_fractal *frac);
 /* colors */
-double	smoothColoring(fractal *frac, double x, double y);
-color	getColor(double smoothCount);
+double	smooth_coloring(t_fractal *frac, double x, double y);
+t_color	get_color(double smoothCount, int flag);
 
 #endif

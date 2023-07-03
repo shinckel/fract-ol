@@ -12,7 +12,7 @@
 
 #include "fractol.h"
 
-double smoothColoring(fractal *frac, double x, double y) 
+double smooth_coloring(t_fractal *frac, double x, double y) 
 {
     double smooth;
     double	zx;
@@ -38,16 +38,6 @@ double smoothColoring(fractal *frac, double x, double y)
 
     return (smooth);
 }
-
-color pallete[] = {
-    {255, 0, 0},   // Red
-    {0, 255, 0},   // Green
-    {0, 0, 255},   // Blue
-    {255, 255, 0}, // Yellow
-    {0, 255, 255}, // Cyan
-    {255, 0, 255}  // Magenta
-    // Add more pallete as needed
-};
 
 /*
 color pallete[] = {
@@ -78,21 +68,27 @@ color pallete[] = {
 // }
 
 
-// 25 1 20
-color getColor(double smoothCount) 
+t_color	get_color(double smoothCount, int flag)
 {
-    color color;
-	//set 1 - pink
-    color.r = (int)(smoothCount * 25) % 256;
-    color.g = (int)(smoothCount * 1) % 256;
-    color.b = (int)(smoothCount * 20) % 256;
-	//set 2 - blue
-	// color.r = (int)((smoothCount) * 1) % 256;
-    // color.g = (int)(log(smoothCount) * 25) % 256;
-    // color.b = (int)((smoothCount) * 15) % 256;
-	//set 3 - black and white
-	// color.r = (int)(255 * (1 + cos(2 * M_PI * log(smoothCount) / 13)) / 2);
-    // color.g = (int)(255 * (1 + cos(2 * M_PI * log(smoothCount) / 13)) / 2);
-    // color.b = (int)(255 * (1 + cos(2 * M_PI * log(smoothCount) / 13)) / 2);
-    return (color);
+	t_color	color;
+
+	if (flag == 1)
+	{
+		color.r = (int)(smoothCount * 25) % 256;
+		color.g = (int)(smoothCount * 1) % 256;
+		color.b = (int)(smoothCount * 20) % 256;
+	}
+	else if (flag == 2)
+	{
+		color.r = (int)((smoothCount) * 1) % 256;
+		color.g = (int)(log(smoothCount) * 25) % 256;
+		color.b = (int)((smoothCount) * 15) % 256;
+	}
+	else if (flag == 3)
+	{
+		color.r = (int)(255 * (1 + cos(2 * M_PI * log(smoothCount) / 13)) / 2);
+		color.g = (int)(255 * (1 + cos(2 * M_PI * log(smoothCount) / 13)) / 2);
+		color.b = (int)(255 * (1 + cos(2 * M_PI * log(smoothCount) / 13)) / 2);
+	}
+	return (color);
 }
