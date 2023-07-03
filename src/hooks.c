@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 14:00:19 by shinckel          #+#    #+#             */
-/*   Updated: 2023/07/03 18:07:47 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/07/03 18:25:43 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,18 @@ int	key_hook(int keycode, t_fractal *frac)
 	if (keycode == PLUS)
 	{
 		if (frac->flag > 0 && frac->flag < 3)
+		{
 			frac->flag++;
-		
-		printf("%i\n", frac->flag);
+			draw_frac(frac, frac->name, frac->flag);
+		}
 	}
 	if (keycode == MINUS)
 	{
 		if (frac->flag > 1 && frac->flag <= 3)
+		{
 			frac->flag--;
-		printf("%i\n", frac->flag);
+			draw_frac(frac, frac->name, frac->flag);
+		}
 	}
 	return (0);
 }

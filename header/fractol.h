@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:18:55 by shinckel          #+#    #+#             */
-/*   Updated: 2023/07/03 18:03:49 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/07/03 18:22:50 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,9 @@ typedef struct s_fractal {
 }	t_fractal;
 
 /* draw fractals */
-void	draw_frac(t_fractal *frac, char *name);
-t_color	mandelbrot(t_fractal *frac, int x, int y);
-t_color	julia(t_fractal *frac, int x, int y);
+void	draw_frac(t_fractal *frac, char *name, int flag);
+double	mandelbrot(t_fractal *frac, int x, int y);
+double	julia(t_fractal *frac, int x, int y);
 /* control hooks */
 int		key_hook(int keycode, t_fractal *frac);
 /* colors */

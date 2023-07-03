@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 17:33:54 by shinckel          #+#    #+#             */
-/*   Updated: 2023/07/03 18:07:57 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/07/03 18:28:23 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,27 +34,22 @@ if (want_aspect > picCanvas_aspect)
         }
 */
 
-t_color mandelbrot(t_fractal *frac, int x, int y)
+double mandelbrot(t_fractal *frac, int x, int y)
 {
 	double	smooth;
-	t_color	color_effect;
 
-	frac->flag = 1;
 	frac->cx = x * ((0.47 + 2.0) / WIDTH) - 2.0;
 	frac->cy = y * ((1.12 + 1.12) / HEIGHT) - 1.12;
 	smooth = smooth_coloring(frac, 0, 0);
-	color_effect = get_color(smooth, frac->flag);
-	return (color_effect);
+	return (smooth);
 }
 
-t_color julia(t_fractal *frac, int x, int y)
+double julia(t_fractal *frac, int x, int y)
 {
 	double	smooth;
 	double	xaxis;
 	double	yaxis;
-	t_color	color_effect;
 
-	frac->flag = 2;
 	xaxis = 3 * (x - WIDTH / 2.0) / WIDTH;
     yaxis = 3 * (y - HEIGHT / 2.0) / HEIGHT;
 	//set1
@@ -64,11 +59,11 @@ t_color julia(t_fractal *frac, int x, int y)
 	// frac->cx = -0.8;
 	// frac->cy = 0.156;
 	//set 3
-	// frac->cx = 0.0;
-	// frac->cy = 0.8;
+	frac->cx = 0.0;
+	frac->cy = 0.8;
 	//set 4
-	frac->cx = 0.285;
-	frac->cy = 0.01;
+	// frac->cx = 0.285;
+	// frac->cy = 0.01;
 	//set 5
 	// frac->cx = - 0.74543;
 	// frac->cy = 0.11301;
@@ -76,6 +71,5 @@ t_color julia(t_fractal *frac, int x, int y)
 	// frac->cx = 0.355;
 	// frac->cy = 0.355;
 	smooth = smooth_coloring(frac, xaxis, yaxis);
-	color_effect = get_color(smooth, frac->flag);
-	return (color_effect);
+	return (smooth);
 }
