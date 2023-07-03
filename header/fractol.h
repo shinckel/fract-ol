@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:18:55 by shinckel          #+#    #+#             */
-/*   Updated: 2023/07/03 11:12:52 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/07/03 11:50:42 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define WIDTH 720
 # define HEIGHT 720
 // iterations
-# define MAX_ITER 1000
+# define MAX_ITER 1500
 // hooks
 # define ESC_KEY 81
 # define RIGHT_ARROW 39
@@ -74,7 +74,7 @@ typedef struct {
 color	mandelbrot(fractal *frac, int x, int y);
 color	julia(fractal *frac, int x, int y);
 /* control hooks */
-int		deal_keys(int keycode, fractal *frac);
+
 /* colors */
 double	smoothColoring(fractal *frac, double x, double y);
 color	getColor(double smoothCount);

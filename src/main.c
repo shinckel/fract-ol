@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:05:53 by shinckel          #+#    #+#             */
-/*   Updated: 2023/07/01 11:52:25 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/07/03 11:44:24 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	main(int argc, char **argv)
 		frac.win = mlx_new_window(frac.mlx, WIDTH,
 				HEIGHT, argv[1]);
 		draw_frac(&frac, argv[1]);
-		mlx_key_hook(frac.win, deal_keys, &frac);
+		// mlx_key_hook(frac.win, deal_keys, &frac);
 		mlx_loop(frac.mlx);
 	}
 	write(1, PARAM, ft_strlen(PARAM));

@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 17:33:54 by shinckel          #+#    #+#             */
-/*   Updated: 2023/07/03 11:38:52 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/07/03 11:50:11 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,9 @@ color julia(fractal *frac, int x, int y)
 	//set 5
 	// frac->cx = - 0.74543;
 	// frac->cy = 0.11301;
+	//set 6
+	// frac->cx = 0.355;
+	// frac->cy = 0.355;
 	smooth = smoothColoring(frac, xaxis, yaxis);
 	color_effect = getColor(smooth);
 	return (color_effect);
