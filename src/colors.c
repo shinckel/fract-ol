@@ -12,7 +12,7 @@
 
 #include "fractol.h"
 
-double smooth_coloring(t_fractal *frac, double x, double y) 
+double smooth_coloring(t_complex_c	*c, double x, double y)
 {
     double smooth;
     double	zx;
@@ -31,8 +31,8 @@ double smooth_coloring(t_fractal *frac, double x, double y)
 			// smooth /= 5.18;
             break;
         }
-        temp = zx * zx - zy * zy + frac->cx;
-        zy = 2 * zx * zy + frac->cy;
+        temp = zx * zx - zy * zy + c->x;
+        zy = 2 * zx * zy + c->y;
         zx = temp;
     }
 
@@ -68,27 +68,26 @@ color pallete[] = {
 // }
 
 
-t_color	get_color(double smoothCount, int flag)
+void	get_color(double smoothCount, t_fractal *frac, t_list **head)
 {
-	t_color	color;
+	t_list	*node;
+	int		rgb1;
+	int		rgb2;
+	int		rgb3;
 
-	if (flag == 1)
-	{
-		color.r = (int)(smoothCount * 25) % 256;
-		color.g = (int)(smoothCount * 1) % 256;
-		color.b = (int)(smoothCount * 20) % 256;
-	}
-	else if (flag == 2)
-	{
-		color.r = (int)((smoothCount) * 1) % 256;
-		color.g = (int)(log(smoothCount) * 25) % 256;
-		color.b = (int)((smoothCount) * 15) % 256;
-	}
-	else if (flag == 3)
-	{
-		color.r = (int)(255 * (1 + cos(2 * M_PI * log(smoothCount) / 13)) / 2);
-		color.g = (int)(255 * (1 + cos(2 * M_PI * log(smoothCount) / 13)) / 2);
-		color.b = (int)(255 * (1 + cos(2 * M_PI * log(smoothCount) / 13)) / 2);
-	}
-	return (color);
+	rgb1 = ((int)(smoothCount * 25) % 256) << 16;
+	rgb1 |= ((int)(smoothCount * 1) % 256) << 8;
+	rgb1 |= (int)(smoothCount * 20) % 256;
+	rgb2 = ((int)((smoothCount) * 1) % 256) << 16;
+	rgb2 |= ((int)(log(smoothCount) * 25) % 256) << 8;
+	rgb2 |= (int)((smoothCount) * 15) % 256;
+	rgb3 = ((int)(255 * (1 + cos(2 * M_PI * log(smoothCount) / 13)) / 2)) << 16;
+	rgb3 |= (int)((255 * (1 + cos(2 * M_PI * log(smoothCount) / 13)) / 2)) << 8;
+	rgb3 |= (int)(255 * (1 + cos(2 * M_PI * log(smoothCount) / 13)) / 2);
+
+	node = ft_lstnew(&rgb1);
+	ft_lstadd_front(&node, ft_lstnew(&rgb2));
+	ft_lstadd_front(&node, ft_lstnew(&rgb3));
+	*head = node;
+	frac->head_color = *head;
 }

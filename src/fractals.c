@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 17:33:54 by shinckel          #+#    #+#             */
-/*   Updated: 2023/07/03 18:28:23 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/07/10 13:19:57 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,77 @@ if (want_aspect > picCanvas_aspect)
         }
 */
 
-double mandelbrot(t_fractal *frac, int x, int y)
+/*
+void	julia_params(t_complex_c *c1, t_complex_c *c2, t_complex_c *c3, t_complex_c *c4)
+{
+	c1->x = -0.0;
+	c1->y = 0.27015;
+	c2->x = -0.8;
+	c2->y = 0.156;
+	c3->x = 0.0;
+	c3->y = 0.8;
+	c4->x = 0.285;
+	c4->y = 0.01;
+	// c5.x = - 0.74543;
+	// c5.y = 0.11301;
+	// c6.x = 0.355;
+	// c6.y = 0.355;
+}
+*/
+
+double mandelbrot(int x, int y)
 {
 	double	smooth;
+	t_complex_c	c;
 
-	frac->cx = x * ((0.47 + 2.0) / WIDTH) - 2.0;
-	frac->cy = y * ((1.12 + 1.12) / HEIGHT) - 1.12;
-	smooth = smooth_coloring(frac, 0, 0);
+	c.x = x * ((0.47 + 2.0) / WIDTH) - 2.0;
+	c.y = y * ((1.12 + 1.12) / HEIGHT) - 1.12;
+	smooth = smooth_coloring(&c, 0, 0);
 	return (smooth);
 }
 
-double julia(t_fractal *frac, int x, int y)
+void print_list(t_list *list)
+{
+	t_list *current = list;
+
+	while (current != NULL)
+	{
+		t_complex_c *complex = (t_complex_c *)current->content;
+		printf("cx: %lf, cy: %lf\n", complex->x, complex->y);
+		current = current->next;
+	}
+}
+
+void julia_list(t_fractal *frac, t_list **head)
+{
+	t_list *node;
+	t_complex_c *c1;
+	t_complex_c *c2;
+	t_complex_c *c3;
+	t_complex_c *c4;
+
+	c1 = malloc(sizeof(t_complex_c));
+	c2 = malloc(sizeof(t_complex_c));
+	c3 = malloc(sizeof(t_complex_c));
+	c4 = malloc(sizeof(t_complex_c));
+	c4 = malloc(sizeof(t_complex_c));
+	c1->x = -0.7;
+	c1->y = 0.27015;
+	c2->x = -0.8;
+	c2->y = 0.156;
+	c3->x = 0.0;
+	c3->y = 0.8;
+	c4->x = 0.285;
+	c4->y = 0.01;
+	node = ft_lstnew(c1);
+	ft_lstadd_front(&node, ft_lstnew(c2));
+	ft_lstadd_front(&node, ft_lstnew(c3));
+	ft_lstadd_front(&node, ft_lstnew(c4));
+	*head = node;
+	frac->head = *head;
+}
+
+double julia(int x, int y, t_complex_c *c)
 {
 	double	smooth;
 	double	xaxis;
@@ -52,24 +112,6 @@ double julia(t_fractal *frac, int x, int y)
 
 	xaxis = 3 * (x - WIDTH / 2.0) / WIDTH;
     yaxis = 3 * (y - HEIGHT / 2.0) / HEIGHT;
-	//set1
-	// frac->cx = -0.7;
-	// frac->cy = 0.27015;
-	//set 2
-	// frac->cx = -0.8;
-	// frac->cy = 0.156;
-	//set 3
-	frac->cx = 0.0;
-	frac->cy = 0.8;
-	//set 4
-	// frac->cx = 0.285;
-	// frac->cy = 0.01;
-	//set 5
-	// frac->cx = - 0.74543;
-	// frac->cy = 0.11301;
-	//set 6
-	// frac->cx = 0.355;
-	// frac->cy = 0.355;
-	smooth = smooth_coloring(frac, xaxis, yaxis);
+	smooth = smooth_coloring(c, xaxis, yaxis);
 	return (smooth);
 }

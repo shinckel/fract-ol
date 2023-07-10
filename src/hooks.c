@@ -6,11 +6,22 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 14:00:19 by shinckel          #+#    #+#             */
-/*   Updated: 2023/07/03 18:25:43 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/07/10 13:10:40 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+void	change_sets(t_fractal *frac, t_list	**list, t_list *head)
+{
+	if (*list != NULL)
+	{
+		*list = (*list)->next;
+		if (*list == NULL)
+			*list = head;
+		draw_frac(frac);
+	}
+}
 
 int	key_hook(int keycode, t_fractal *frac)
 {
@@ -19,22 +30,10 @@ int	key_hook(int keycode, t_fractal *frac)
 		mlx_destroy_window(frac->mlx, frac->win);
 		exit(EXIT_SUCCESS);
 	}
-	if (keycode == PLUS)
-	{
-		if (frac->flag > 0 && frac->flag < 3)
-		{
-			frac->flag++;
-			draw_frac(frac, frac->name, frac->flag);
-		}
-	}
-	if (keycode == MINUS)
-	{
-		if (frac->flag > 1 && frac->flag <= 3)
-		{
-			frac->flag--;
-			draw_frac(frac, frac->name, frac->flag);
-		}
-	}
+	if (keycode == SPACE)
+		change_sets(frac, &frac->list, frac->head);
+	if (keycode == TAB)
+		change_sets(frac, &frac->list_color, frac->head_color);
 	return (0);
 }
 
@@ -108,3 +107,14 @@ int	mouse_hook(int key_code, int x, int y, t_fractal *fractal)
 	return (0);
 }
 */
+
+
+
+// if (keycode == TAB)
+	// {
+	// 	if (frac->flag > 1 && frac->flag <= 3)
+	// 	{
+	// 		frac->flag--;
+	// 		draw_frac(frac);
+	// 	}
+	// }

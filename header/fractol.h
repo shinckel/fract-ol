@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:18:55 by shinckel          #+#    #+#             */
-/*   Updated: 2023/07/03 18:22:50 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/07/10 14:20:12 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,13 @@
 # define ESC_KEY 65307
 # define LEFT_ARROW 65361 
 # define RIGHT_ARROW 65363
-# define DOWN 65364 
-# define PLUS 65451
-# define MINUS 65453
+# define DOWN 65364
+// # define PLUS 65451
+// # define MINUS 65453
+
+// for my MAC(only use it at home)
+# define SPACE 32
+# define TAB 65289
 // errors
 # define MINILIBX "\e[1;41m failed to initialize MiniLibX \e[0m \n"
 # define PARAM "\e[1;41m write 1 fractol name: mandelbrot/ julia/ phoenix \e[0m \n"
@@ -43,10 +47,23 @@ typedef struct s_color {
 	unsigned char	b;
 }	t_color;
 
+typedef struct s_complex_c
+{
+    double x;
+    double y;
+} t_complex_c;
+
 typedef struct s_fractal {
 
 	void		*mlx;
 	void		*win;
+
+	t_list		*list;
+	t_list		*head;
+	t_list		*list_color;
+	t_list		*head_color;
+
+	int			pixel_color;
 
 	double		cx;
 	double		cy;
@@ -73,13 +90,16 @@ typedef struct s_fractal {
 }	t_fractal;
 
 /* draw fractals */
-void	draw_frac(t_fractal *frac, char *name, int flag);
-double	mandelbrot(t_fractal *frac, int x, int y);
-double	julia(t_fractal *frac, int x, int y);
+void	draw_frac(t_fractal *frac);
+double	mandelbrot(int x, int y);
+double	julia(int x, int y, t_complex_c *c);
+/* julia parameters */
+void	julia_list(t_fractal *frac, t_list **head);
 /* control hooks */
+void	change_sets(t_fractal *frac, t_list	**list, t_list *head);
 int		key_hook(int keycode, t_fractal *frac);
 /* colors */
-double	smooth_coloring(t_fractal *frac, double x, double y);
-t_color	get_color(double smoothCount, int flag);
+double	smooth_coloring(t_complex_c *c, double x, double y);
+void	get_color(double smoothCount, t_fractal *frac, t_list **head);
 
 #endif

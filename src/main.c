@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:05:53 by shinckel          #+#    #+#             */
-/*   Updated: 2023/07/03 18:22:14 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/07/10 14:22:32 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,16 @@
 // 	return (0);
 // }
 
-void	draw_frac(t_fractal *frac, char *name, int flag)
+int	get_rgb(int r, int g, int b)
+{
+	return (r << 16 | g << 8 | b);
+}
+
+void	draw_frac(t_fractal *frac)
 {
 	int		x;
 	int		y;
-	int		pixel_color;
 	double	smooth;
-	t_color	color;
 
 	x = 0;
 	y = 0;
@@ -37,13 +40,13 @@ void	draw_frac(t_fractal *frac, char *name, int flag)
 		y = 0;
 		while (y < HEIGHT)
 		{
-			if (!ft_strncmp(name, "mandelbrot", 10))
-				smooth = mandelbrot(frac, x, y);
-			else if(!ft_strncmp(name, "julia", 5))
-				smooth = julia(frac, x, y);
-			color = get_color(smooth, flag);
-			pixel_color = (int)((color.r << 16) + (color.g << 8) + color.b);
-			mlx_pixel_put(frac->mlx, frac->win, x, y, pixel_color);
+			if (!ft_strncmp(frac->name, "mandelbrot", 10))
+				smooth = mandelbrot(x, y);
+			else if(!ft_strncmp(frac->name, "julia", 5))
+				smooth = julia(x, y, frac->list->content);
+			get_color(smooth, frac, &frac->list_color);
+			frac->pixel_color = *(int *)(frac->list_color->content);
+			mlx_pixel_put(frac->mlx, frac->win, x, y, frac->pixel_color);
 			y++;
 		}
 		x++;
@@ -54,8 +57,10 @@ int	main(int argc, char **argv)
 {
 	t_fractal	frac;
 
+	frac.list = NULL;
 	frac.name = argv[1];
 	frac.flag = 1;
+	julia_list(&frac, &frac.list);
 	if (argc == 2)
 	{
 		frac.mlx = mlx_init();
@@ -66,7 +71,7 @@ int	main(int argc, char **argv)
 		}
 		frac.win = mlx_new_window(frac.mlx, WIDTH,
 				HEIGHT, frac.name);
-		draw_frac(&frac, frac.name, frac.flag);
+		draw_frac(&frac);
 		mlx_key_hook(frac.win, key_hook, &frac);
 		mlx_loop(frac.mlx);
 	}
