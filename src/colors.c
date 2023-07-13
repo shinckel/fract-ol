@@ -67,7 +67,6 @@ color pallete[] = {
 // 	return (color);
 // }
 
-
 void	get_color(double smoothCount, t_fractal *frac, t_list **head)
 {
 	t_list	*node;
@@ -85,9 +84,9 @@ void	get_color(double smoothCount, t_fractal *frac, t_list **head)
 	rgb3 |= (int)((255 * (1 + cos(2 * M_PI * log(smoothCount) / 13)) / 2)) << 8;
 	rgb3 |= (int)(255 * (1 + cos(2 * M_PI * log(smoothCount) / 13)) / 2);
 
-	node = ft_lstnew(&rgb1);
+	node = ft_lstnew(&rgb3);
+	ft_lstadd_front(&node, ft_lstnew(&rgb1));
 	ft_lstadd_front(&node, ft_lstnew(&rgb2));
-	ft_lstadd_front(&node, ft_lstnew(&rgb3));
 	*head = node;
 	frac->head_color = *head;
 }

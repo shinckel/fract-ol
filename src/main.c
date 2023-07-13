@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:05:53 by shinckel          #+#    #+#             */
-/*   Updated: 2023/07/10 14:22:32 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/07/13 21:20:22 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,62 @@
 // 	return (0);
 // }
 
-int	get_rgb(int r, int g, int b)
-{
-	return (r << 16 | g << 8 | b);
-}
+
+// void update_colors(double mu, t_fractal *frac, t_list **head)
+// {
+//     t_list *current = *head;
+// 	int rgb1;
+// 	int rgb2;
+// 	int rgb3;
+
+//     while (current != NULL)
+//     {
+//         if (*((int *)(current->content)) == 1)
+//         {
+//             rgb1 = ((int)(mu * 25) % 256) << 16;
+//             rgb1 |= ((int)(mu * 1) % 256) << 8;
+//             rgb1 |= (int)(mu * 20) % 256;
+// 			*((int *)(current->content)) = rgb1;
+//         }
+//         if (*((int *)(current->content)) == 2)
+//         {
+//             rgb2 = ((int)(mu * 1) % 256) << 16;
+//             rgb2 |= ((int)(log(mu) * 25) % 256) << 8;
+//             rgb2 |= (int)(mu * 15) % 256;
+// 			*((int *)(current->content)) = rgb2;
+//         }
+//         if (*((int *)(current->content)) == 3)
+//         {
+//             rgb3 = ((int)(255 * (1 + cos(2 * M_PI * log(mu) / 13)) / 2)) << 16;
+//             rgb3 |= ((int)(255 * (1 + cos(2 * M_PI * log(mu) / 13)) / 2)) << 8;
+//             rgb3 |= (int)(255 * (1 + cos(2 * M_PI * log(mu) / 13)) / 2);
+// 			*((int *)(current->content)) = rgb2;
+//         }
+//         current = current->next;
+//     }
+// }
+
+// void	color_list(t_fractal *frac, t_list **head)
+// {
+// 	t_list	*node;
+
+// 	int rgb1 = 1;
+// 	int rgb2 = 2;
+// 	int rgb3 = 3;
+
+// 	node = ft_lstnew(&rgb1);
+// 	ft_lstadd_front(&node, ft_lstnew(&rgb2));
+// 	ft_lstadd_front(&node, ft_lstnew(&rgb3));
+// 	*head = node;
+// 	printf("%i\n", *((int *)(*head)->content));
+// 	frac->head_color = *head;
+// }
 
 void	draw_frac(t_fractal *frac)
 {
 	int		x;
 	int		y;
-	double	smooth;
+	double	mu;
 
 	x = 0;
 	y = 0;
@@ -41,10 +87,10 @@ void	draw_frac(t_fractal *frac)
 		while (y < HEIGHT)
 		{
 			if (!ft_strncmp(frac->name, "mandelbrot", 10))
-				smooth = mandelbrot(x, y);
+				mu = mandelbrot(x, y);
 			else if(!ft_strncmp(frac->name, "julia", 5))
-				smooth = julia(x, y, frac->list->content);
-			get_color(smooth, frac, &frac->list_color);
+				mu = julia(x, y, frac->list->content);
+			get_color(mu, frac, &frac->list_color);
 			frac->pixel_color = *(int *)(frac->list_color->content);
 			mlx_pixel_put(frac->mlx, frac->win, x, y, frac->pixel_color);
 			y++;
@@ -58,8 +104,8 @@ int	main(int argc, char **argv)
 	t_fractal	frac;
 
 	frac.list = NULL;
+	frac.list_color = NULL;
 	frac.name = argv[1];
-	frac.flag = 1;
 	julia_list(&frac, &frac.list);
 	if (argc == 2)
 	{
