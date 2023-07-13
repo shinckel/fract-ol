@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:05:53 by shinckel          #+#    #+#             */
-/*   Updated: 2023/07/13 21:20:22 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/07/13 23:13:57 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,73 @@
 // 	frac->head_color = *head;
 // }
 
-void	draw_frac(t_fractal *frac)
+void *colorIterator(t_fractal *frac)
+{
+    if (frac->list_color != NULL)
+    {
+        frac->list_color = frac->list_color->next;
+        if (frac->list_color == NULL)
+            frac->list_color = frac->head_color;
+    }
+    return (frac->list_color->content);
+}
+
+void draw_frac(t_fractal *frac, void *(*colorIterator)(t_fractal *), int useColorIterator)
+{
+    int x;
+    int y;
+    double mu;
+
+    x = 0;
+    y = 0;
+    while (x < WIDTH)
+    {
+        y = 0;
+        while (y < HEIGHT)
+        {
+            if (!ft_strncmp(frac->name, "mandelbrot", 10))
+                mu = mandelbrot(x, y);
+            else if (!ft_strncmp(frac->name, "julia", 5))
+                mu = julia(x, y, frac->list->content);
+            get_color(mu, frac, &frac->list_color);
+            if (useColorIterator)
+                frac->pixel_color = *(int *)colorIterator(frac);
+            else
+                frac->pixel_color = *(int *)frac->list_color->content;
+            mlx_pixel_put(frac->mlx, frac->win, x, y, frac->pixel_color);
+            y++;
+        }
+        x++;
+    }
+}
+
+int main(int argc, char **argv)
+{
+    t_fractal frac;
+
+    frac.list = NULL;
+    frac.list_color = NULL;
+    frac.name = argv[1];
+    julia_list(&frac, &frac.list);
+    if (argc == 2)
+    {
+        frac.mlx = mlx_init();
+        if (!frac.mlx)
+        {
+            write(1, MINILIBX, ft_strlen(MINILIBX));
+            return (1);
+        }
+        frac.win = mlx_new_window(frac.mlx, WIDTH, HEIGHT, frac.name);
+        draw_frac(&frac, colorIterator, 0);
+        mlx_key_hook(frac.win, key_hook, &frac);
+        mlx_loop(frac.mlx);
+    }
+    write(1, PARAM, ft_strlen(PARAM));
+    return (0);
+}
+
+/*
+void	draw_frac(t_fractal *frac, void *(*colorIterator)(t_fractal *))
 {
 	int		x;
 	int		y;
@@ -91,7 +157,8 @@ void	draw_frac(t_fractal *frac)
 			else if(!ft_strncmp(frac->name, "julia", 5))
 				mu = julia(x, y, frac->list->content);
 			get_color(mu, frac, &frac->list_color);
-			frac->pixel_color = *(int *)(frac->list_color->content);
+			// frac->pixel_color = *(int *)(frac->list_color->next->content);
+			frac->pixel_color = *(int *)colorIterator(frac);
 			mlx_pixel_put(frac->mlx, frac->win, x, y, frac->pixel_color);
 			y++;
 		}
@@ -117,10 +184,11 @@ int	main(int argc, char **argv)
 		}
 		frac.win = mlx_new_window(frac.mlx, WIDTH,
 				HEIGHT, frac.name);
-		draw_frac(&frac);
+		draw_frac(&frac, colorIterator);
 		mlx_key_hook(frac.win, key_hook, &frac);
 		mlx_loop(frac.mlx);
 	}
 	write(1, PARAM, ft_strlen(PARAM));
     return (0);
 }
+*/

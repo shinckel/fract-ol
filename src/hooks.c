@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 14:00:19 by shinckel          #+#    #+#             */
-/*   Updated: 2023/07/10 13:10:40 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/07/13 23:10:21 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	change_sets(t_fractal *frac, t_list	**list, t_list *head)
 		*list = (*list)->next;
 		if (*list == NULL)
 			*list = head;
-		draw_frac(frac);
+		draw_frac(frac, colorIterator, 0);
 	}
 }
 
@@ -33,7 +33,8 @@ int	key_hook(int keycode, t_fractal *frac)
 	if (keycode == SPACE)
 		change_sets(frac, &frac->list, frac->head);
 	if (keycode == TAB)
-		change_sets(frac, &frac->list_color, frac->head_color);
+		draw_frac(frac, colorIterator, 1);
+	// change_sets(frac, &frac->current, frac->head_color);
 	return (0);
 }
 
