@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:05:53 by shinckel          #+#    #+#             */
-/*   Updated: 2023/07/17 23:09:00 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/07/17 23:15:39 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void draw_frac(t_fractal *frac, int flag)
         }
         x++;
     }
-    printf("%d\n", *(int *)frac->list_color->content);
+    // printf("%d\n", *(int *)frac->list_color->content);
 }
 
 int main(int argc, char **argv)
