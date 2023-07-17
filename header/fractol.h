@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:18:55 by shinckel          #+#    #+#             */
-/*   Updated: 2023/07/13 22:59:44 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/07/17 22:30:43 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,11 @@ typedef struct s_fractal {
 	t_list		*head;
 	t_list		*list_color;
 	t_list		*head_color;
-	t_list		*current;
+
+	t_list		*copy;
+	t_list		*copy_head;
+
+	int			flag;
 
 	int			pixel_color;
 
@@ -72,8 +76,6 @@ typedef struct s_fractal {
 	double		zy_new;
 	double		zoom;
 	char		*name;
-
-	int			flag;
 
 	double		x2;
 	double		y2;
@@ -91,18 +93,16 @@ typedef struct s_fractal {
 }	t_fractal;
 
 /* draw fractals */
-void draw_frac(t_fractal *frac, void *(*colorIterator)(t_fractal *), int useColorIterator);
+void draw_frac(t_fractal *frac, int flag);
 double	mandelbrot(int x, int y);
 double	julia(int x, int y, t_complex_c *c);
 /* julia parameters */
 void	julia_list(t_fractal *frac, t_list **head);
 /* control hooks */
-void	change_sets(t_fractal *frac, t_list	**list, t_list *head);
+void	change_sets(t_fractal *frac, t_list **list, t_list *head);
 int		key_hook(int keycode, t_fractal *frac);
 /* colors */
 double	smooth_coloring(t_complex_c *c, double x, double y);
 void	get_color(double mu, t_fractal *frac, t_list **head);
-
-void *colorIterator(t_fractal *frac);
 
 #endif
