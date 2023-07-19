@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 17:33:54 by shinckel          #+#    #+#             */
-/*   Updated: 2023/07/19 21:44:12 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/07/19 21:49:00 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 double mandelbrot(t_fractal *frac, int x, int y)
 {
-	double	smooth;
+	double	mu;
 	t_complex_c	c;
 
 	c.x = (x + frac->xarrow) / frac->zoom * (0.47 + 2.0) / (WIDTH - 1) - 2.0;
 	c.y = (y + frac->yarrow) / frac->zoom * (1.12 + 1.12) / (WIDTH - 1) - 1.12;
-	smooth = smooth_coloring(&c, 0, 0);
-	return (smooth);
+	mu = smooth_coloring(&c, 0, 0);
+	return (mu);
 }
 
 void print_list(t_list *list)
@@ -66,7 +66,7 @@ void julia_list(t_fractal *frac, t_list **head)
 
 double julia(t_fractal *frac, int x, int y, t_complex_c *c)
 {
-	double	smooth;
+	double	mu;
 	double	ratio;
 	double	xaxis;
 	double	yaxis;
@@ -75,8 +75,8 @@ double julia(t_fractal *frac, int x, int y, t_complex_c *c)
 		ratio = HEIGHT * frac->zoom;
 	else
 		ratio = WIDTH * frac->zoom;
-	xaxis = 1.5 * frac->radius * ((x + frac->xarrow) - WIDTH / 2.0) / ratio;
-    yaxis = 1.5 * frac->radius * ((y + frac->yarrow) - HEIGHT / 2.0) / ratio;
-	smooth = smooth_coloring(c, xaxis, yaxis);
-	return (smooth);
+	xaxis = 1.3 * frac->radius * ((x + frac->xarrow) - WIDTH / 2.0) / ratio;
+    yaxis = 1.3 * frac->radius * ((y + frac->yarrow) - HEIGHT / 2.0) / ratio;
+	mu = smooth_coloring(c, xaxis, yaxis);
+	return (mu);
 }

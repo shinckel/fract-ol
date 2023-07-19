@@ -14,20 +14,20 @@
 
 double smooth_coloring(t_complex_c	*c, double x, double y)
 {
-    double smooth;
+    double	mu;
     double	zx;
 	double	zy;
-    double temp;
+    double	temp;
     int i;
 
 	i = 0;
 	zx = 0.0 + x;
 	zy = 0.0 + y;
-	smooth = MAX_ITER;
+	mu = MAX_ITER;
     while (i++ < MAX_ITER)
 	{
         if (zx * zx + zy * zy >= 4.0) {
-            smooth = i - log(log(sqrt(zx * zx + zy * zy))) / log(2);
+            mu = i - log(log(sqrt(zx * zx + zy * zy))) / log(2);
             break;
         }
         temp = zx * zx - zy * zy + c->x;
@@ -35,7 +35,7 @@ double smooth_coloring(t_complex_c	*c, double x, double y)
         zx = temp;
     }
 
-    return (smooth);
+    return (mu);
 }
 
 void	get_color(double mu, t_fractal *frac, t_list **head)

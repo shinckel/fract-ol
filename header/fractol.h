@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:18:55 by shinckel          #+#    #+#             */
-/*   Updated: 2023/07/19 21:36:18 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/07/19 21:47:38 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include "../libft/header/libft.h"
 
 // window
-# define WIDTH 1280
+# define WIDTH 720
 # define HEIGHT 720
 // iterations
 # define MAX_ITER 1500
