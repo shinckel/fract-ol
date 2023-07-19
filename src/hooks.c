@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 14:00:19 by shinckel          #+#    #+#             */
-/*   Updated: 2023/07/17 23:22:46 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/07/19 21:27:50 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,27 @@ int	key_hook(int keycode, t_fractal *frac)
 		mlx_destroy_window(frac->mlx, frac->win);
 		exit(EXIT_SUCCESS);
 	}
-	if (keycode == SPACE)
+	else if (keycode == SPACE)
 	{
 		if (frac->flag == -1)
 			frac->flag = 2;
 		change_sets(frac, &frac->list, frac->head);
-		draw_frac(frac, frac->flag);
 	}
-	if (keycode == TAB)
-		draw_frac(frac, ++frac->flag);
+	else if (keycode == TAB)
+		++frac->flag;
+	else if (keycode == LEFT)
+		frac->xarrow -= 30;
+	else if (keycode == DOWN)
+		frac->yarrow += 30;
+	else if (keycode == RIGHT)
+		frac->xarrow += 30;
+	else if (keycode == UP)
+	{
+		frac->yarrow -= 30;
+		printf("%f\n", frac->yarrow);
+	}
+	if (keycode != ESC_KEY)
+		draw_frac(frac, frac->flag);
 	return (0);
 }
 

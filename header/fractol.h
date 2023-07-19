@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:18:55 by shinckel          #+#    #+#             */
-/*   Updated: 2023/07/17 22:30:43 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/07/19 21:36:18 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,18 @@
 # include "../libft/header/libft.h"
 
 // window
-# define WIDTH 720
+# define WIDTH 1280
 # define HEIGHT 720
 // iterations
 # define MAX_ITER 1500
 // hooks
 # define ESC_KEY 65307
-# define LEFT_ARROW 65361 
-# define RIGHT_ARROW 65363
+# define LEFT 65361
+# define UP 65362
+# define RIGHT 65363
 # define DOWN 65364
 // # define PLUS 65451
 // # define MINUS 65453
-
-// for my MAC(only use it at home)
 # define SPACE 32
 # define TAB 65289
 // errors
@@ -63,9 +62,6 @@ typedef struct s_fractal {
 	t_list		*list_color;
 	t_list		*head_color;
 
-	t_list		*copy;
-	t_list		*copy_head;
-
 	int			flag;
 
 	int			pixel_color;
@@ -93,10 +89,10 @@ typedef struct s_fractal {
 }	t_fractal;
 
 /* draw fractals */
-void draw_frac(t_fractal *frac, int flag);
-double	mandelbrot(int x, int y);
-double	julia(int x, int y, t_complex_c *c);
-/* julia parameters */
+void	draw_frac(t_fractal *frac, int flag);
+double	mandelbrot(t_fractal *frac, int x, int y);
+double	julia(t_fractal *frac, int x, int y, t_complex_c *c);
+/* julia - change parameters */
 void	julia_list(t_fractal *frac, t_list **head);
 /* control hooks */
 void	change_sets(t_fractal *frac, t_list **list, t_list *head);

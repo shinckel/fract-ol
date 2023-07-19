@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:05:53 by shinckel          #+#    #+#             */
-/*   Updated: 2023/07/17 23:15:39 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/07/19 21:43:17 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void draw_frac(t_fractal *frac, int flag)
         while (y < HEIGHT)
         {
             if (!ft_strncmp(frac->name, "mandelbrot", 10))
-                mu = mandelbrot(x, y);
+                mu = mandelbrot(frac, x, y);
             else if (!ft_strncmp(frac->name, "julia", 5))
-                mu = julia(x, y, frac->list->content);
+                mu = julia(frac, x, y, frac->list->content);
             get_color(mu, frac, &frac->list_color);
 			if (flag == 1)
 				change_sets(frac, &frac->list_color, frac->head_color);
@@ -43,7 +43,6 @@ void draw_frac(t_fractal *frac, int flag)
         }
         x++;
     }
-    // printf("%d\n", *(int *)frac->list_color->content);
 }
 
 int main(int argc, char **argv)
@@ -54,6 +53,10 @@ int main(int argc, char **argv)
     frac.list_color = NULL;
 	frac.flag = 0;
     frac.name = argv[1];
+	frac.xarrow = 0;
+	frac.yarrow = 0;
+	frac.zoom = 1;
+	frac.radius = 3;
     julia_list(&frac, &frac.list);
     if (argc == 2)
     {
