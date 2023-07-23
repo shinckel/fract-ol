@@ -12,29 +12,34 @@
 
 #include "fractol.h"
 
-double smooth_coloring(t_complex_c	*c, double x, double y)
+double smooth_coloring(t_complex *c, double x, double y, double k)
 {
-    double	mu;
-    double	zx;
-	double	zy;
-    double	temp;
-    int i;
+    t_complex	z;
+    t_complex	z_minus1;
+	double		zx;
+	double		zy;
+    double		mu;
+    int			i;
 
 	i = 0;
-	zx = 0.0 + x;
-	zy = 0.0 + y;
 	mu = MAX_ITER;
+	z_minus1 = *c;
+	z.x = x; 
+	z.y = y;
     while (i++ < MAX_ITER)
-	{
-        if (zx * zx + zy * zy >= 4.0) {
-            mu = i - log(log(sqrt(zx * zx + zy * zy))) / log(2);
+    {
+        if (z.x * z.x + z.y * z.y >= 4.0)
+        {
+            mu = i - log(log(sqrt(z.x * z.x + z.y * z.y))) / log(2);
             break;
         }
-        temp = zx * zx - zy * zy + c->x;
-        zy = 2 * zx * zy + c->y;
-        zx = temp;
+		zx = z.x;
+        zy = z.y;
+        z.x = zx * zx - zy * zy + c->x + k * z_minus1.x;
+        z.y = 2 * zx * zy + c->y + k * z_minus1.y;
+        z_minus1.x = zx;
+		z_minus1.y = zy;
     }
-
     return (mu);
 }
 
@@ -48,9 +53,9 @@ void	get_color(double mu, t_fractal *frac, t_list **head)
 	rgb1 = ((int)(mu * 25) % 255) << 16;
 	rgb1 |= ((int)(mu * 1) % 255) << 8;
 	rgb1 |= (int)(mu * 20) % 255;
-	rgb2 = ((int)((mu) * 1) % 255) << 16;
-	rgb2 |= ((int)(log(mu) * 25) % 255) << 8;
-	rgb2 |= (int)((mu) * 15) % 256;
+	rgb2 = ((int)(mu * 1) % 255) << 16;
+	rgb2 |= ((int)(mu * 4) % 255) << 8;
+	rgb2 |= (int)(mu * 15) % 256;
 	rgb3 = ((int)(255 * (1 + cos(2 * M_PI * log(mu) / 13)) / 2)) << 16;
 	rgb3 |= (int)((255 * (1 + cos(2 * M_PI * log(mu) / 13)) / 2)) << 8;
 	rgb3 |= (int)(255 * (1 + cos(2 * M_PI * log(mu) / 13)) / 2);

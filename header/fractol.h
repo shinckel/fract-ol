@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:18:55 by shinckel          #+#    #+#             */
-/*   Updated: 2023/07/19 21:47:38 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/07/23 21:12:04 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ typedef struct s_color {
 	unsigned char	b;
 }	t_color;
 
-typedef struct s_complex_c
+typedef struct s_complex
 {
     double x;
     double y;
-} t_complex_c;
+} t_complex;
 
 typedef struct s_fractal {
 
@@ -66,10 +66,9 @@ typedef struct s_fractal {
 
 	int			pixel_color;
 
-	double		cx;
-	double		cy;
-	double		zx_new;
-	double		zy_new;
+	double		zx;
+	double		zy;
+	double		mu;
 	double		zoom;
 	char		*name;
 
@@ -91,14 +90,14 @@ typedef struct s_fractal {
 /* draw fractals */
 void	draw_frac(t_fractal *frac, int flag);
 double	mandelbrot(t_fractal *frac, int x, int y);
-double	julia(t_fractal *frac, int x, int y, t_complex_c *c);
+double	julia(t_fractal *frac, int x, int y, t_complex *c);
 /* julia - change parameters */
 void	julia_list(t_fractal *frac, t_list **head);
 /* control hooks */
 void	change_sets(t_fractal *frac, t_list **list, t_list *head);
 int		key_hook(int keycode, t_fractal *frac);
 /* colors */
-double	smooth_coloring(t_complex_c *c, double x, double y);
+double	smooth_coloring(t_complex *c, double x, double y, double k);
 void	get_color(double mu, t_fractal *frac, t_list **head);
 
 #endif

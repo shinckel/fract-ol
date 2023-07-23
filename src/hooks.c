@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 14:00:19 by shinckel          #+#    #+#             */
-/*   Updated: 2023/07/19 21:27:50 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/07/23 20:47:26 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,17 @@ void change_sets(t_fractal *frac, t_list **list, t_list *head)
     }
 }
 
+int	close_win(t_fractal *fractal)
+{
+	// missing free fractal structures
+	mlx_destroy_window(fractal->mlx, fractal->win);
+	exit(EXIT_SUCCESS);
+}
+
 int	key_hook(int keycode, t_fractal *frac)
 {
 	if (keycode == ESC_KEY)
-	{
-		mlx_destroy_window(frac->mlx, frac->win);
-		exit(EXIT_SUCCESS);
-	}
+		close_win(frac);
 	else if (keycode == SPACE)
 	{
 		if (frac->flag == -1)
@@ -45,10 +49,7 @@ int	key_hook(int keycode, t_fractal *frac)
 	else if (keycode == RIGHT)
 		frac->xarrow += 30;
 	else if (keycode == UP)
-	{
 		frac->yarrow -= 30;
-		printf("%f\n", frac->yarrow);
-	}
 	if (keycode != ESC_KEY)
 		draw_frac(frac, frac->flag);
 	return (0);
@@ -71,41 +72,6 @@ void	ft_dezoom(double x, double y, t_fractal *fractal)
 	fractal->iterations--;
 }
 
-int	close_game(t_fractal *fractal)
-{
-	freeall(fractal);
-	exit(EXIT_SUCCESS);
-	return (EXIT_SUCCESS);
-}
-
-int	key_hook(int keycode, t_fractal *fractal)
-{
-	if (keycode == ESC)
-		close_game(fractal);
-	else if (keycode == LEFT)
-		fractal->xarrow -= 30;
-	else if (keycode == DOWN)
-		fractal->yarrow += 30;
-	else if (keycode == RIGHT)
-		fractal->xarrow += 30;
-	else if (keycode == UP)
-		fractal->yarrow -= 30;
-	else if (keycode == PLUS)
-		fractal->color += 100;
-	else if (keycode == MINUS)
-		fractal->color -= 100;
-	else if (keycode == R)
-	{
-		ft_printf("Reset time!\n");
-		julia_param(fractal, fractal->name);
-	}
-	else if (keycode == Z)
-		fractal->zoom = 1;
-	if (keycode != ESC)
-		fractalsetup(fractal);
-	return (0);
-}
-
 int	mouse_hook(int key_code, int x, int y, t_fractal *fractal)
 {
 	if (key_code == 1 && !ft_strncmp(fractal->name, "julia", 5))
@@ -124,14 +90,3 @@ int	mouse_hook(int key_code, int x, int y, t_fractal *fractal)
 	return (0);
 }
 */
-
-
-
-// if (keycode == TAB)
-	// {
-	// 	if (frac->flag > 1 && frac->flag <= 3)
-	// 	{
-	// 		frac->flag--;
-	// 		draw_frac(frac);
-	// 	}
-	// }

@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:05:53 by shinckel          #+#    #+#             */
-/*   Updated: 2023/07/19 21:43:17 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/07/23 21:12:00 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 
 void draw_frac(t_fractal *frac, int flag)
 {
-    int x;
-    int y;
-    double mu;
+	int	x;
+	int	y;
 
-    x = 0;
-    y = 0;
+	x = 0;
+	y = 0;
     while (x < WIDTH)
     {
         y = 0;
         while (y < HEIGHT)
         {
             if (!ft_strncmp(frac->name, "mandelbrot", 10))
-                mu = mandelbrot(frac, x, y);
-            else if (!ft_strncmp(frac->name, "julia", 5))
-                mu = julia(frac, x, y, frac->list->content);
-            get_color(mu, frac, &frac->list_color);
+                frac->mu = mandelbrot(frac, x, y);
+            else if (!ft_strncmp(frac->name, "julia", 5) || 
+				!ft_strncmp(frac->name, "phoenix", 7))
+                frac->mu = julia(frac, x, y, frac->list->content);
+            get_color(frac->mu, frac, &frac->list_color);
 			if (flag == 1)
 				change_sets(frac, &frac->list_color, frac->head_color);
             if (flag > 1)
@@ -38,25 +38,31 @@ void draw_frac(t_fractal *frac, int flag)
 				change_sets(frac, &frac->list_color, frac->head_color);
 				frac->flag = -1;
             }
-			mlx_pixel_put(frac->mlx, frac->win, x, y, *(int *)frac->list_color->content);
+			mlx_pixel_put(frac->mlx, frac->win, x, y, 
+				*(int *)frac->list_color->content);
             y++;
         }
         x++;
     }
 }
 
+void	initialize_params(t_fractal *frac, char *str)
+{
+	frac->list = NULL;
+    frac->list_color = NULL;
+	frac->flag = 0;
+    frac->name = str;
+	frac->xarrow = 0;
+	frac->yarrow = 0;
+	frac->zoom = 1;
+	frac->radius = 3;
+}
+
 int main(int argc, char **argv)
 {
     t_fractal frac;
 
-    frac.list = NULL;
-    frac.list_color = NULL;
-	frac.flag = 0;
-    frac.name = argv[1];
-	frac.xarrow = 0;
-	frac.yarrow = 0;
-	frac.zoom = 1;
-	frac.radius = 3;
+	initialize_params(&frac, argv[1]);
     julia_list(&frac, &frac.list);
     if (argc == 2)
     {
