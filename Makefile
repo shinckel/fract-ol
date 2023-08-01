@@ -6,7 +6,7 @@
 #    By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 15:00:40 by shinckel          #+#    #+#              #
-#    Updated: 2023/06/29 15:46:04 by shinckel         ###   ########.fr        #
+#    Updated: 2023/07/27 13:46:35 by shinckel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ RESET := \033[0m
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@$(MAKE) -C $(LIBFT_DIR)
+	@$(MAKE) bonus -C $(LIBFT_DIR)
 	@$(MAKE) -C $(MINILIBX_DIR)
 	@echo "$(YELLOW) MiniLibX compiled $(RESET)"
 	@$(CC) $(CFLAGS) -lm $(SRC) $(LIBFT) $(MLXFLAGS) -o $(NAME)

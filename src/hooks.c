@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 14:00:19 by shinckel          #+#    #+#             */
-/*   Updated: 2023/07/23 20:47:26 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/08/01 16:51:28 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,23 +23,12 @@ void change_sets(t_fractal *frac, t_list **list, t_list *head)
     }
 }
 
-int	close_win(t_fractal *fractal)
-{
-	// missing free fractal structures
-	mlx_destroy_window(fractal->mlx, fractal->win);
-	exit(EXIT_SUCCESS);
-}
-
-int	key_hook(int keycode, t_fractal *frac)
+void	key_hook(int keycode, t_fractal *frac)
 {
 	if (keycode == ESC_KEY)
-		close_win(frac);
+		close_game(frac);
 	else if (keycode == SPACE)
-	{
-		if (frac->flag == -1)
-			frac->flag = 2;
 		change_sets(frac, &frac->list, frac->head);
-	}
 	else if (keycode == TAB)
 		++frac->flag;
 	else if (keycode == LEFT)
@@ -50,43 +39,51 @@ int	key_hook(int keycode, t_fractal *frac)
 		frac->xarrow += 30;
 	else if (keycode == UP)
 		frac->yarrow -= 30;
-	if (keycode != ESC_KEY)
-		draw_frac(frac, frac->flag);
-	return (0);
-}
-
-/*
-void	ft_zoom(double x, double y, t_fractal *fractal)
-{
-	fractal->x = (x / fractal->zoom) - (x / (fractal->zoom * 1.3));
-	fractal->y = (y / fractal->zoom) - (y / (fractal->zoom * 1.3));
-	fractal->zoom *= 1.3;
-	fractal->iterations++;
-}
-
-void	ft_dezoom(double x, double y, t_fractal *fractal)
-{
-	fractal->x = (x / fractal->zoom) - (x / (fractal->zoom / 1.3));
-	fractal->y = (y / fractal->zoom) - (y / (fractal->zoom / 1.3));
-	fractal->zoom /= 1.3;
-	fractal->iterations--;
-}
-
-int	mouse_hook(int key_code, int x, int y, t_fractal *fractal)
-{
-	if (key_code == 1 && !ft_strncmp(fractal->name, "julia", 5))
+	if (keycode == M || keycode == J || keycode == P || keycode == SPACE)
 	{
-		fractal->c.x = ((double) x / fractal->width * 4 - 2);
-		fractal->c.y = ((double) y / fractal->height * 3 - 1.5);
-		fractal->zoom = 1;
+		if (frac->flag == -1)
+			frac->flag = 2;
 	}
-	else if (key_code == 4)
-		ft_zoom(((double) x / fractal->width * 1000 - 500),
-			((double) y / fractal->height * 1000 - 500), fractal);
-	else if (key_code == 5)
-		ft_dezoom(((double) x / fractal->width * 1000 - 500),
-			((double) y / fractal->height * 1000 - 500), fractal);
-	fractalsetup(fractal);
+	if (keycode != ESC_KEY)
+		draw_action(frac, frac->flag);
+}
+
+void	key_fractal_utils(int keycode, t_fractal *frac)
+{
+	if (keycode == M)
+		frac->name = "mandelbrot";
+	else if (keycode == J)
+		frac->name = "julia";
+	else if (keycode == P)
+		frac->name = "phoenix";
+	else if (keycode == Z)
+		frac->zoom += 0.2;
+	else if (keycode == MINUS)
+		frac->zoom -= 0.2;
+	else if (keycode == R)
+	{
+		frac->xarrow = 0;
+		frac->yarrow = 0;
+		frac->zoom = 1;
+		write(1, RESET, strlen(RESET));
+	}
+	else if (keycode == H)
+	{
+		if (frac->help)
+			frac->help = 0;
+		else
+			frac->help = 1;
+	}
+}
+
+int	handle_hooks(int keycode, t_fractal *frac)
+{
+	key_hook(keycode, frac);
+	key_fractal_utils(keycode, frac);
 	return (0);
 }
-*/
+
+// int	handle_mouse(int button, t_fractal *frac)
+// {
+	
+// }
