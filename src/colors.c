@@ -50,15 +50,15 @@ void	get_color(double mu, t_fractal *frac, t_list **head)
 	int		rgb2;
 	int		rgb3;
 
-	rgb1 = ((int)(mu * 25) % 255) << 16;
-	rgb1 |= ((int)(mu * 1) % 255) << 8;
-	rgb1 |= (int)(mu * 20) % 255;
-	rgb2 = ((int)(mu * 1) % 255) << 16;
-	rgb2 |= ((int)(mu * 4) % 255) << 8;
+	rgb1 = ((int)(mu * 25) % 256) << 16;
+	rgb1 |= ((int)(mu * 1) % 256) << 8;
+	rgb1 |= (int)(mu * 20) % 256;
+	rgb2 = ((int)(mu * 1) % 256) << 16;
+	rgb2 |= ((int)(mu * 4) % 256) << 8;
 	rgb2 |= (int)(mu * 15) % 256;
-	rgb3 = ((int)(255 * (1 + cos(2 * M_PI * log(mu) / 13)) / 2)) << 16;
-	rgb3 |= (int)((255 * (1 + cos(2 * M_PI * log(mu) / 13)) / 2)) << 8;
-	rgb3 |= (int)(255 * (1 + cos(2 * M_PI * log(mu) / 13)) / 2);
+	rgb3 = ((int)(256 * (1 + cos(2 * M_PI * log(mu) / 13)) / 2)) << 16;
+	rgb3 |= (int)((256 * (1 + cos(2 * M_PI * log(mu) / 13)) / 2)) << 8;
+	rgb3 |= (int)(256 * (1 + cos(2 * M_PI * log(mu) / 13)) / 2);
 
 	node = ft_lstnew(&rgb3);
 	ft_lstadd_front(&node, ft_lstnew(&rgb2));
