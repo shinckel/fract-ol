@@ -46,7 +46,7 @@ The Mandelbrot set, denoted M, is the set of complex numbers `c` such that the c
 
 | Task | Prototype | Description |
 |:----|:-----:|:--------:|
-| **`git submodule`** | `git submodule add ./libft` | To add an external library to your project, it will generate a `.gitmodules` file. P.S. You must add targets to the Makefile! |
+| **`git submodule`** | `git submodule add git@github.com:shinckel/libft.git` | To add an external library to your project, it will generate a `.gitmodules` file. P.S. You must add targets to the Makefile! |
 | **`xquartz`** | `brew install --cask xquartz` | allows cross-platform applications using X11 for the GUI to run on macOS |
 | **`X11`** | x | enables users to run graphical applications on a remote server and interact with them using their local display and I/O devices |
 | **`Create canvas`** | `mlx_init()` `mlx_new_window()` `mlx_loop()` | Initializes the MiniLibX library and assigns the mlx(connection with the graphical server); creates a new window using the specified width, height, and name, and assigns the window pointer to `fractal.win`; enters the event loop of MiniLibX, which continuously listens for events such as key presses and mouse movements. This function call will keep the program running until the window is closed |
