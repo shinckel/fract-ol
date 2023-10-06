@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 11:39:49 by shinckel          #+#    #+#             */
-/*   Updated: 2023/08/01 17:27:47 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/10/06 17:42:11 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	list_fractal_commands(t_fractal *frac)
 		0xF64740, "change julia set:       space");
 	mlx_string_put(frac->mlx, frac->win, WIDTH - 200, 85,
 		0xF64740, "phoenix:                    p");
-	mlx_string_put(frac->mlx, frac->win, WIDTH - 200, 100, 
+	mlx_string_put(frac->mlx, frac->win, WIDTH - 200, 100,
 		0xF64740, "change color scheme:      tab");
 }
 

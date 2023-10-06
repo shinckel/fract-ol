@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+         #
+#    By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 15:00:40 by shinckel          #+#    #+#              #
-#    Updated: 2023/07/27 13:46:35 by shinckel         ###   ########.fr        #
+#    Updated: 2023/10/06 17:50:08 by shinckel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,9 +28,9 @@ LIBFT := $(LIBFT_DIR)/libft.a
 MINILIBX := $(MINILIBX_DIR)/libmlx_Linux.a
 
 # Define colors
-RED := \033[1;41m
-YELLOW := \033[1;103m
-GREEN := \033[1;42m
+RED := \033[1;30;41m
+YELLOW := \033[1;30;103m
+GREEN := \033[1;30;42m
 RESET := \033[0m
 
 all: $(NAME)

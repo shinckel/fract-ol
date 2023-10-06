@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 14:00:19 by shinckel          #+#    #+#             */
-/*   Updated: 2023/08/01 16:51:28 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/10/06 18:27:01 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void change_sets(t_fractal *frac, t_list **list, t_list *head)
+void	change_sets(t_fractal *frac, t_list **list, t_list *head)
 {
 	(void)frac;
-    if (*list != NULL)
-    {
-        *list = (*list)->next;
-        if (*list == NULL)
-            *list = head;
-    }
+	if (*list != NULL)
+	{
+		*list = (*list)->next;
+		if (*list == NULL)
+			*list = head;
+	}
 }
 
 void	key_hook(int keycode, t_fractal *frac)

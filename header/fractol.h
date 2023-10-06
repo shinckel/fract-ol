@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:18:55 by shinckel          #+#    #+#             */
-/*   Updated: 2023/08/01 17:30:05 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/10/06 18:06:56 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@
 # define J 106
 # define P 112
 // errors and messages
-# define MINILIBX "\e[1;41m Failed to initialize MiniLibX \e[0m \n"
-# define PARAM "\e[1;41m Write 1 fractol name: mandelbrot/ julia/ phoenix \e[0m \n"
-# define RESET "\e[1;103m Reset view \e[0m \n"
-# define FINISH "\e[1;41m Finish game \e[0m \n"
+# define MINILIBX "\e[1;30;41m Failed to initialize MiniLibX \e[0m \n"
+# define PARAM "\e[1;30;41m Write 1 name: mandelbrot/ julia/ phoenix \e[0m \n"
+# define RESET "\e[1;30;103m Reset view \e[0m \n"
+# define FINISH "\e[1;30;41m Finish game \e[0m \n"
 
 typedef struct s_color {
 	unsigned char	r;
@@ -53,42 +53,32 @@ typedef struct s_color {
 	unsigned char	b;
 }	t_color;
 
-typedef struct s_complex
-{
-    double x;
-    double y;
-} t_complex;
+typedef struct s_complex {
+	double	x;
+	double	y;
+}	t_complex;
 
 typedef struct s_fractal {
-
 	void		*mlx;
 	void		*win;
-
 	t_list		*list;
 	t_list		*head;
 	t_list		*list_color;
 	t_list		*head_color;
-
 	int			flag;
-
 	int			pixel_color;
-
 	int			help;
-
 	double		zx;
 	double		zy;
 	double		mu;
 	double		zoom;
 	char		*name;
-
 	double		x2;
 	double		y2;
 	double		tmp;
-
 	double		xarrow;
 	double		yarrow;
 	double		radius;
-
 	void		*img;
 	void		*addr;
 	int			bits_per_pixel;
