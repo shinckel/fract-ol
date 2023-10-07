@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:18:55 by shinckel          #+#    #+#             */
-/*   Updated: 2023/10/07 11:35:52 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/10/07 19:44:32 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@
 # include "../libft/header/libft.h"
 
 // window
-# define WIDTH 720
-# define HEIGHT 720
+# define WIDTH 1280
+# define HEIGHT 1280
 // iterations
-// # define MAX_ITER 1500
+# define MAX_ITER 10
 // hooks
 # define ESC_KEY 65307
 # define LEFT 65361
@@ -58,13 +58,18 @@ typedef struct s_complex {
 	double	y;
 }	t_complex;
 
+typedef struct s_constset {
+	double	pset[2];
+	double	jset[4][2];
+}	t_constset;
+
 typedef struct s_fractal {
 	void		*mlx;
 	void		*win;
 	t_list		*list;
 	t_list		*head;
-	t_list		*list_color;
-	t_list		*head_color;
+	// t_list		*list_color;
+	// t_list		*head_color;
 	int			flag;
 	int			pixel_color;
 	int			help;
@@ -85,6 +90,7 @@ typedef struct s_fractal {
 	int			line_length;
 	int			endian;
 	int			iterations;
+	t_constset	*sets;
 }	t_fractal;
 
 /* draw fractals */
@@ -92,18 +98,20 @@ void	draw_action(t_fractal *frac, int flag);
 void	draw_content(t_fractal *frac, int x, int y, int flag);
 /* fractals variations */
 double	mandelbrot(t_fractal *frac, int x, int y);
-double	julia(t_fractal *frac, int x, int y, t_complex *c);
+double	julia(t_fractal *frac, int x, int y);
 /* julia - change parameters */
-void	julia_list(t_fractal *frac, t_list **head);
+void	julia_list(t_fractal *frac, t_list **headRef, t_list **head);
 /* control hooks */
-void	change_sets(t_fractal *frac, t_list **list, t_list *head);
+void	change_sets(t_list **headRef, t_list *head);
 void	key_hook(int keycode, t_fractal *frac);
 int		handle_key(int keycode, t_fractal *frac);
 void	key_fractal_utils(int keycode, t_fractal *frac);
 int		handle_mouse(int keycode, int x, int y, t_fractal *frac);
 /* colors */
-double	smooth_coloring(t_complex *c, double x, double y, double k);
-void	get_color(double mu, t_fractal *frac, t_list **head);
+// double	smooth_coloring(t_complex *c, double x, double y, double k);
+double	smooth_coloring(t_fractal frac, double x, double y, double k);
+// void	get_color(double mu, t_list **headRef, t_list **head);
+int	get_color(double mu, int flag);
 /* utils - help messages and put pixel */
 int		my_mlx_pixel_put(t_fractal *fractal, int x, int y, int color);
 void	list_fractal_commands(t_fractal *frac);
@@ -112,5 +120,6 @@ void	print_help(t_fractal *frac);
 /* free, no leaks */
 int		freeall(t_fractal *fractal);
 int		close_game(t_fractal *fractal);
+void	freeRef(t_list **headRef);
 
 #endif

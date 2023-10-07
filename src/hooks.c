@@ -3,24 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 14:00:19 by shinckel          #+#    #+#             */
-/*   Updated: 2023/10/07 11:48:14 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/10/07 18:25:05 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	change_sets(t_fractal *frac, t_list **list, t_list *head)
+// circular linked list
+void	change_sets(t_list **headRef, t_list *head)
 {
-	(void)frac;
-	if (*list != NULL)
-	{
-		*list = (*list)->next;
-		if (*list == NULL)
-			*list = head;
-	}
+	if (*headRef == NULL)
+		return ;
+
+	printf("i am herer with : %p\n", *headRef);
+	if ((*headRef)->next == NULL)
+		(*headRef)->next = head;
+	else
+		*headRef = (*headRef)->next;
 }
 
 void	key_hook(int keycode, t_fractal *frac)
@@ -28,7 +30,7 @@ void	key_hook(int keycode, t_fractal *frac)
 	if (keycode == ESC_KEY)
 		close_game(frac);
 	else if (keycode == SPACE)
-		change_sets(frac, &frac->list, frac->head);
+		change_sets(&frac->list, frac->head);
 	else if (keycode == TAB)
 		++frac->flag;
 	else if (keycode == LEFT)
@@ -83,27 +85,27 @@ int	handle_key(int keycode, t_fractal *frac)
 	return (0);
 }
 
-static void	ft_zoom(double x, double y, t_fractal *frac)
-{
-	frac->x2 = (x / frac->zoom) - (x / (frac->zoom * 1.3));
-	frac->y2 = (y / frac->zoom) - (y / (frac->zoom * 1.3));
-	frac->zoom *= 1.3;
-	frac->iterations++;
-}
+// static void	ft_zoom(double x, double y, t_fractal *frac)
+// {
+// 	frac->x2 = (x / frac->zoom) - (x / (frac->zoom * 1.3));
+// 	frac->y2 = (y / frac->zoom) - (y / (frac->zoom * 1.3));
+// 	frac->zoom *= 1.3;
+// 	frac->iterations++;
+// }
 
-static void	ft_dezoom(double x, double y, t_fractal *frac)
-{
-	frac->x2 = (x / frac->zoom) - (x / (frac->zoom / 1.3));
-	frac->y2 = (y / frac->zoom) - (y / (frac->zoom / 1.3));
-	frac->zoom /= 1.3;
-	frac->iterations--;
-}
+// static void	ft_dezoom(double x, double y, t_fractal *frac)
+// {
+// 	frac->x2 = (x / frac->zoom) - (x / (frac->zoom / 1.3));
+// 	frac->y2 = (y / frac->zoom) - (y / (frac->zoom / 1.3));
+// 	frac->zoom /= 1.3;
+// 	frac->iterations--;
+// }
 
-int		handle_mouse(int keycode, int x, int y, t_fractal *frac)
-{
-	if (keycode == 4)
-		ft_zoom();
-	else if (keycode == 5)
-		ft_dezoom();
-	return (0);
-}
+// int		handle_mouse(int keycode, int x, int y, t_fractal *frac)
+// {
+// 	if (keycode == 4)
+// 		ft_zoom();
+// 	else if (keycode == 5)
+// 		ft_dezoom();
+// 	return (0);
+// }

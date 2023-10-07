@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 20:13:28 by shinckel          #+#    #+#             */
-/*   Updated: 2023/10/07 11:35:02 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/10/07 19:49:56 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ double	smooth_coloring(t_complex *c, double x, double y, double k)
 	int			i;
 
 	i = 0;
-	frac.mu = frac.iterations;
+	frac.mu = MAX_ITER;
 	z_minus1 = *c;
 	z.x = x;
 	z.y = y;
-	while (i++ < frac.iterations)
+	while (i++ < MAX_ITER)
 	{
 		if (z.x * z.x + z.y * z.y >= 4.0)
 		{
@@ -43,9 +43,29 @@ double	smooth_coloring(t_complex *c, double x, double y, double k)
 	return (frac.mu);
 }
 
-void	get_color(double mu, t_fractal *frac, t_list **head)
+// void	get_color(double mu, t_list **headRef, t_list **head)
+// {
+// 	int		rgb1;
+// 	int		rgb2;
+// 	int		rgb3;
+
+// 	rgb1 = ((int)(mu * 25) % 256) << 16;
+// 	rgb1 |= ((int)(mu * 1) % 256) << 8;
+// 	rgb1 |= (int)(mu * 20) % 256;
+// 	rgb2 = ((int)(mu * 1) % 256) << 16;
+// 	rgb2 |= ((int)(mu * 4) % 256) << 8;
+// 	rgb2 |= (int)(mu * 15) % 256;
+// 	rgb3 = ((int)(256 * (1 + cos(2 * M_PI * log(mu) / 13)) / 2)) << 16;
+// 	rgb3 |= (int)((256 * (1 + cos(2 * M_PI * log(mu) / 13)) / 2)) << 8;
+// 	rgb3 |= (int)(256 * (1 + cos(2 * M_PI * log(mu) / 13)) / 2);
+// 	*headRef = ft_lstnew(&rgb1);
+// 	ft_lstadd_front(headRef, ft_lstnew(&rgb2));
+// 	ft_lstadd_front(headRef, ft_lstnew(&rgb3));
+// 	*head = *headRef;
+// }
+
+int	get_color(double mu, int flag)
 {
-	t_list	*node;
 	int		rgb1;
 	int		rgb2;
 	int		rgb3;
@@ -59,9 +79,10 @@ void	get_color(double mu, t_fractal *frac, t_list **head)
 	rgb3 = ((int)(256 * (1 + cos(2 * M_PI * log(mu) / 13)) / 2)) << 16;
 	rgb3 |= (int)((256 * (1 + cos(2 * M_PI * log(mu) / 13)) / 2)) << 8;
 	rgb3 |= (int)(256 * (1 + cos(2 * M_PI * log(mu) / 13)) / 2);
-	node = ft_lstnew(&rgb1);
-	ft_lstadd_front(&node, ft_lstnew(&rgb2));
-	ft_lstadd_front(&node, ft_lstnew(&rgb3));
-	*head = node;
-	frac->head_color = *head;
+	if (!flag)
+		return (rgb1);
+	else if (flag == 1)
+		return (rgb2);
+	else
+		return (rgb3);
 }

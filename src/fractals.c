@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 17:33:54 by shinckel          #+#    #+#             */
-/*   Updated: 2023/10/06 16:46:37 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/10/07 19:43:40 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,55 +23,44 @@ double	mandelbrot(t_fractal *frac, int x, int y)
 	return (mu);
 }
 
-void	julia_list(t_fractal *frac, t_list **head)
+void	julia_list(t_fractal *frac, t_list **headRef, t_list **head)
 {
-	t_list		*node;
-	t_complex	*c1;
-	t_complex	*c2;
-	t_complex	*c3;
-	t_complex	*c4;
-
-	c1 = malloc(sizeof(t_complex));
-	c2 = malloc(sizeof(t_complex));
-	c3 = malloc(sizeof(t_complex));
-	c4 = malloc(sizeof(t_complex));
-	c1->x = -0.8;
-	c1->y = 0.156;
-	c2->x = 0.285;
-	c2->y = 0.01;
-	c3->x = 0.0;
-	c3->y = 0.8;
-	c4->x = -0.1;
-	c4->y = 0.651;
-	node = ft_lstnew(c1);
-	ft_lstadd_front(&node, ft_lstnew(c2));
-	ft_lstadd_front(&node, ft_lstnew(c3));
-	ft_lstadd_front(&node, ft_lstnew(c4));
-	*head = node;
-	frac->head = *head;
+	frac->sets->jset[1][1] = -0.8;
+	frac->sets->jset[1][2] = 0.156;
+	frac->sets->jset[2][1] = 0.285;
+	frac->sets->jset[2][2] = 0.01;
+	frac->sets->jset[3][1] = 0.0;
+	frac->sets->jset[3][2] = 0.8;
+	frac->sets->jset[4][1] = -0.1;
+	frac->sets->jset[4][2] = 0.651;
+	*headRef = ft_lstnew(frac->sets->jset[1]);
+	ft_lstadd_front(headRef, ft_lstnew(frac->sets->jset[2]));
+	ft_lstadd_front(headRef, ft_lstnew(frac->sets->jset[3]));
+	ft_lstadd_front(headRef, ft_lstnew(frac->sets->jset[4]));
+	*head = *headRef;
 }
 
-double	julia(t_fractal *frac, int x, int y, t_complex *c)
+double	julia(t_fractal *frac, int x, int y)
 {
 	double		mu;
 	double		ratio;
 	double		xaxis;
 	double		yaxis;
-	t_complex	*phoenix;
+	// t_complex	*phoenix;
 
-	phoenix = malloc(sizeof(t_complex));
-	phoenix->x = 0.5667;
-	phoenix->y = 0;
+	// phoenix = malloc(sizeof(t_complex));
+	// phoenix->x = 0.5667;
+	// phoenix->y = 0;
 	if (WIDTH < HEIGHT)
 		ratio = HEIGHT * frac->zoom;
 	else
 		ratio = WIDTH * frac->zoom;
 	xaxis = frac->radius * ((x + frac->xarrow) - WIDTH / 2.0) / ratio;
 	yaxis = frac->radius * ((y + frac->yarrow) - HEIGHT / 2.0) / ratio;
-	if (!ft_strncmp(frac->name, "phoenix", 7))
-		mu = smooth_coloring(phoenix, xaxis, yaxis, -0.5);
-	else
-		mu = smooth_coloring(c, xaxis, yaxis, 0);
+	// if (!ft_strncmp(frac->name, "phoenix", 7))
+	// 	mu = smooth_coloring(phoenix, xaxis, yaxis, -0.5);
+	// else
+	mu = smooth_coloring(frac, xaxis, yaxis, 0);
 	return (mu);
 }
 
