@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 14:00:19 by shinckel          #+#    #+#             */
-/*   Updated: 2023/10/06 18:27:01 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/10/07 11:48:14 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,14 +76,34 @@ void	key_fractal_utils(int keycode, t_fractal *frac)
 	}
 }
 
-int	handle_hooks(int keycode, t_fractal *frac)
+int	handle_key(int keycode, t_fractal *frac)
 {
 	key_hook(keycode, frac);
 	key_fractal_utils(keycode, frac);
 	return (0);
 }
 
-// int	handle_mouse(int button, t_fractal *frac)
-// {
-	
-// }
+static void	ft_zoom(double x, double y, t_fractal *frac)
+{
+	frac->x2 = (x / frac->zoom) - (x / (frac->zoom * 1.3));
+	frac->y2 = (y / frac->zoom) - (y / (frac->zoom * 1.3));
+	frac->zoom *= 1.3;
+	frac->iterations++;
+}
+
+static void	ft_dezoom(double x, double y, t_fractal *frac)
+{
+	frac->x2 = (x / frac->zoom) - (x / (frac->zoom / 1.3));
+	frac->y2 = (y / frac->zoom) - (y / (frac->zoom / 1.3));
+	frac->zoom /= 1.3;
+	frac->iterations--;
+}
+
+int		handle_mouse(int keycode, int x, int y, t_fractal *frac)
+{
+	if (keycode == 4)
+		ft_zoom();
+	else if (keycode == 5)
+		ft_dezoom();
+	return (0);
+}

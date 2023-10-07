@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:18:55 by shinckel          #+#    #+#             */
-/*   Updated: 2023/10/06 18:06:56 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/10/07 11:35:52 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define WIDTH 720
 # define HEIGHT 720
 // iterations
-# define MAX_ITER 1500
+// # define MAX_ITER 1500
 // hooks
 # define ESC_KEY 65307
 # define LEFT 65361
@@ -84,6 +84,7 @@ typedef struct s_fractal {
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
+	int			iterations;
 }	t_fractal;
 
 /* draw fractals */
@@ -97,9 +98,9 @@ void	julia_list(t_fractal *frac, t_list **head);
 /* control hooks */
 void	change_sets(t_fractal *frac, t_list **list, t_list *head);
 void	key_hook(int keycode, t_fractal *frac);
-int		handle_hooks(int keycode, t_fractal *frac);
+int		handle_key(int keycode, t_fractal *frac);
 void	key_fractal_utils(int keycode, t_fractal *frac);
-int		handle_mouse(int button, t_fractal *frac);
+int		handle_mouse(int keycode, int x, int y, t_fractal *frac);
 /* colors */
 double	smooth_coloring(t_complex *c, double x, double y, double k);
 void	get_color(double mu, t_fractal *frac, t_list **head);

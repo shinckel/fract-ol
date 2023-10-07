@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 20:13:28 by shinckel          #+#    #+#             */
-/*   Updated: 2023/10/06 18:22:21 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/10/07 11:35:02 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
+// in my first version, the loop run until the macro MAX_ITER
+// frac.mu = MAX_ITER;
 double	smooth_coloring(t_complex *c, double x, double y, double k)
 {
 	t_complex	z;
@@ -20,11 +22,11 @@ double	smooth_coloring(t_complex *c, double x, double y, double k)
 	int			i;
 
 	i = 0;
-	frac.mu = MAX_ITER;
+	frac.mu = frac.iterations;
 	z_minus1 = *c;
 	z.x = x;
 	z.y = y;
-	while (i++ < MAX_ITER)
+	while (i++ < frac.iterations)
 	{
 		if (z.x * z.x + z.y * z.y >= 4.0)
 		{

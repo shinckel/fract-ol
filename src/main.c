@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:05:53 by shinckel          #+#    #+#             */
-/*   Updated: 2023/10/06 18:31:52 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/10/07 11:36:43 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	initialize_params(t_fractal *frac, char *str)
 	frac->yarrow = 0;
 	frac->zoom = 1;
 	frac->radius = 3;
+	frac->iterations = 200;
 	frac->img = mlx_new_image(frac->mlx, WIDTH, HEIGHT);
 	frac->addr = mlx_get_data_addr(frac->img, &frac->bits_per_pixel,
 			&frac->line_length, &frac->endian);
@@ -94,7 +95,8 @@ int	main(int argc, char **argv)
 		julia_list(&frac, &frac.list);
 		frac.win = mlx_new_window(frac.mlx, WIDTH, HEIGHT, frac.name);
 		draw_action(&frac, 0);
-		mlx_key_hook(frac.win, handle_hooks, &frac);
+		mlx_key_hook(frac.win, handle_key, &frac);
+		// mlx_mouse_hook(frac.win, handle_mouse, &frac);
 		mlx_loop(frac.mlx);
 	}
 	else
