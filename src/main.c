@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:05:53 by shinckel          #+#    #+#             */
-/*   Updated: 2023/10/07 19:41:36 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/10/08 14:32:52 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 int	check_name(char *str)
 {
-	if (!ft_strncmp(str, "mandelbrot", 10)
-		|| !ft_strncmp(str, "julia", 5) || !ft_strncmp(str, "phoenix", 7))
+	if ((!ft_strncmp(str, "mandelbrot", 10) && ft_strlen(str) == 10)
+		|| (!ft_strncmp(str, "julia", 5) && ft_strlen(str) == 5)
+		|| (!ft_strncmp(str, "phoenix", 7) && ft_strlen(str) == 7))
 		return (1);
 	return (0);
 }
@@ -46,11 +47,13 @@ void	draw_content(t_fractal *frac, int x, int y, int flag)
 	int	tab;
 
 	tab	= 0;
+	if (frac->i == 4)
+			frac->i = 0;
 	if (!ft_strncmp(frac->name, "mandelbrot", 10))
 		frac->mu = mandelbrot(frac, x, y);
 	else if (!ft_strncmp(frac->name, "julia", 5)
 		|| !ft_strncmp(frac->name, "phoenix", 7))
-		frac->mu = julia(frac, x, y, frac->list->content);
+		frac->mu = julia(frac, x, y, (frac->c->jset[frac->i]));
 	tab = get_color(frac->mu, flag);
 	if (flag == 1)
 		tab = get_color(frac->mu, flag);
@@ -62,31 +65,10 @@ void	draw_content(t_fractal *frac, int x, int y, int flag)
 	my_mlx_pixel_put(frac, x, y, tab);
 }
 
-// void	draw_content(t_fractal *frac, int x, int y, int flag)
-// {
-// 	(void)flag;
-// 	if (!ft_strncmp(frac->name, "mandelbrot", 10))
-// 		frac->mu = mandelbrot(frac, x, y);
-// 	else if (!ft_strncmp(frac->name, "julia", 5)
-// 		|| !ft_strncmp(frac->name, "phoenix", 7))
-// 		frac->mu = julia(frac, x, y, frac->list->content);
-// 	get_color(frac->mu, &frac->list_color, &frac->head_color);
-// 	if (flag == 1)
-// 		change_sets(&frac->list_color, frac->head_color);
-// 	if (flag > 1)
-// 	{
-// 		frac->list_color = frac->list_color->next;
-// 		change_sets(&frac->list_color, frac->head_color);
-// 		frac->flag = -1;
-// 	}
-// 	my_mlx_pixel_put(frac, x, y, *(int *)frac->list_color->content);
-// }
-
 void	initialize_params(t_fractal *frac, char *str)
 {
+	frac->i = 0;
 	frac->help = 0;
-	frac->list = NULL;
-	// frac->list_color = NULL;
 	frac->flag = 0;
 	frac->name = str;
 	frac->xarrow = 0;
@@ -99,8 +81,6 @@ void	initialize_params(t_fractal *frac, char *str)
 			&frac->line_length, &frac->endian);
 }
 
-// after key hook
-// mlx_mouse_hook(frac.win, handle_mouse, &frac);
 int	main(int argc, char **argv)
 {
 	t_fractal	frac;
@@ -114,17 +94,15 @@ int	main(int argc, char **argv)
 			return (1);
 		}
 		initialize_params(&frac, argv[1]);
-		julia_list(&frac, &frac.list, &frac.head);
+		julia_list_of_arrays(&frac);
 		frac.win = mlx_new_window(frac.mlx, WIDTH, HEIGHT, frac.name);
 		draw_action(&frac, 0);
 		mlx_key_hook(frac.win, handle_key, &frac);
-		// mlx_mouse_hook(frac.win, handle_mouse, &frac);
-		// need to be free!
+		mlx_hook(frac.win, 17, 1L << 0, close_game, &frac);
+		mlx_mouse_hook(frac.win, handle_mouse, &frac);
 		mlx_loop(frac.mlx);
 	}
 	else
 		write(1, PARAM, ft_strlen(PARAM));
 	return (0);
 }
-
-// valgrind --leak-check=full

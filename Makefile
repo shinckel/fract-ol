@@ -6,7 +6,7 @@
 #    By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 15:00:40 by shinckel          #+#    #+#              #
-#    Updated: 2023/10/06 17:50:08 by shinckel         ###   ########.fr        #
+#    Updated: 2023/10/08 09:39:48 by shinckel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME := fractol
 CC := gcc
 CFLAGS := -Wall -Wextra -Werror -Iheader -g
 CFLAGS += -I/opt/X11/include
-#CFLAGS += -fsanitize=address
+CFLAGS += -fsanitize=address
 
 MLXFLAGS = -L ./minilibx-linux -lm -lmlx -Ilmlx -lXext -lX11 -L/usr/X11/lib -L/opt/X11/lib
 # to confirm... do I need this flag?

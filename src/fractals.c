@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 17:33:54 by shinckel          #+#    #+#             */
-/*   Updated: 2023/10/07 19:43:40 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/10/08 14:31:32 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,66 +15,46 @@
 double	mandelbrot(t_fractal *frac, int x, int y)
 {
 	double		mu;
-	t_complex	c;
 
-	c.x = (x + frac->xarrow) / frac->zoom * (0.47 + 2.0) / (WIDTH - 1) - 2.0;
-	c.y = (y + frac->yarrow) / frac->zoom * (1.12 + 1.12) / (WIDTH - 1) - 1.12;
-	mu = smooth_coloring(&c, 0, 0, 0);
+	frac->c->mset[0] = (x + frac->xarrow) / frac->zoom * (0.47 + 2.0) / (WIDTH - 1) - 2.0;
+	frac->c->mset[1] = (y + frac->yarrow) / frac->zoom * (1.12 + 1.12) / (WIDTH - 1) - 1.12;
+	mu = smooth_coloring(frac->c->mset, 0, 0, 0);
 	return (mu);
 }
 
-void	julia_list(t_fractal *frac, t_list **headRef, t_list **head)
+void	julia_list_of_arrays(t_fractal *frac)
 {
-	frac->sets->jset[1][1] = -0.8;
-	frac->sets->jset[1][2] = 0.156;
-	frac->sets->jset[2][1] = 0.285;
-	frac->sets->jset[2][2] = 0.01;
-	frac->sets->jset[3][1] = 0.0;
-	frac->sets->jset[3][2] = 0.8;
-	frac->sets->jset[4][1] = -0.1;
-	frac->sets->jset[4][2] = 0.651;
-	*headRef = ft_lstnew(frac->sets->jset[1]);
-	ft_lstadd_front(headRef, ft_lstnew(frac->sets->jset[2]));
-	ft_lstadd_front(headRef, ft_lstnew(frac->sets->jset[3]));
-	ft_lstadd_front(headRef, ft_lstnew(frac->sets->jset[4]));
-	*head = *headRef;
+	frac->c = malloc(sizeof(t_complex));
+	frac->c->jset[0][0] = -0.8;
+	frac->c->jset[0][1] = 0.156;
+	frac->c->jset[1][0] = 0.285;
+	frac->c->jset[1][1] = 0.01;
+	frac->c->jset[2][0] = 0.0;
+	frac->c->jset[2][1] = 0.8;
+	frac->c->jset[3][0] = -0.1;
+	frac->c->jset[3][1] = 0.651;
+	frac->c->jset[4][0] = -0.70176;
+	frac->c->jset[4][1] = -0.3842;
+	frac->c->pset[0] = 0.5667;
+	frac->c->pset[1] = 0;
 }
 
-double	julia(t_fractal *frac, int x, int y)
+double	julia(t_fractal *frac, int x, int y, double *num)
 {
 	double		mu;
 	double		ratio;
 	double		xaxis;
 	double		yaxis;
-	// t_complex	*phoenix;
 
-	// phoenix = malloc(sizeof(t_complex));
-	// phoenix->x = 0.5667;
-	// phoenix->y = 0;
 	if (WIDTH < HEIGHT)
 		ratio = HEIGHT * frac->zoom;
 	else
 		ratio = WIDTH * frac->zoom;
 	xaxis = frac->radius * ((x + frac->xarrow) - WIDTH / 2.0) / ratio;
 	yaxis = frac->radius * ((y + frac->yarrow) - HEIGHT / 2.0) / ratio;
-	// if (!ft_strncmp(frac->name, "phoenix", 7))
-	// 	mu = smooth_coloring(phoenix, xaxis, yaxis, -0.5);
-	// else
-	mu = smooth_coloring(frac, xaxis, yaxis, 0);
+	if (!ft_strncmp(frac->name, "phoenix", 7))
+		mu = smooth_coloring(frac->c->pset, xaxis, yaxis, -0.5);
+	else
+		mu = smooth_coloring(num, xaxis, yaxis, 0);
 	return (mu);
 }
-
-// void	print_list(t_list *list)
-// {
-// 	t_list *current = list;
-
-// 	while (current != NULL)
-// 	{
-// 		t_complex *complex = (t_complex *)current->content;
-// 		printf("cx: %lf, cy: %lf\n", complex->x, complex->y);
-// 		current = current->next;
-// 	}
-// }
-
-// c5->x = -0.70176;
-// c5->y = -0.3842;
