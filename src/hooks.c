@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 14:00:19 by shinckel          #+#    #+#             */
-/*   Updated: 2023/10/08 14:32:28 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/10/08 19:25:45 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,29 +86,23 @@ int	handle_key(int keycode, t_fractal *frac)
 	return (0);
 }
 
-static void	ft_zoom(double x, double y, t_fractal *frac)
+int	handle_mouse(int keycode, int x, int y, t_fractal *frac)
 {
-	frac->x2 = (x / frac->zoom) - (x / (frac->zoom * 1.3));
-	frac->y2 = (y / frac->zoom) - (y / (frac->zoom * 1.3));
-	frac->zoom *= 1.3;
-	frac->iterations++;
-}
-
-static void	ft_dezoom(double x, double y, t_fractal *frac)
-{
-	frac->x2 = (x / frac->zoom) - (x / (frac->zoom / 1.3));
-	frac->y2 = (y / frac->zoom) - (y / (frac->zoom / 1.3));
-	frac->zoom /= 1.3;
-	frac->iterations--;
-}
-
-int		handle_mouse(int keycode, int x, int y, t_fractal *frac)
-{
+	(void)x;
+	(void)y;
 	if (keycode == 4)
-		ft_zoom(((double) x / WIDTH * 1000 - 500),
-			((double) y / HEIGHT * 1000 - 500), frac);
+	{
+		frac->zoom *= 1.3;
+		frac->iterations++;
+	}
 	else if (keycode == 5)
-		ft_dezoom(((double) x / WIDTH * 1000 - 500),
-			((double) y / HEIGHT * 1000 - 500), frac);
+	{
+		if (frac->zoom > 1)
+		{
+			frac->zoom /= 1.3;
+			frac->iterations--;
+		}
+	}
+	draw_action(frac, frac->flag);
 	return (0);
 }

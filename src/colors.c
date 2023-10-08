@@ -6,11 +6,19 @@
 /*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 20:13:28 by shinckel          #+#    #+#             */
-/*   Updated: 2023/10/08 14:31:22 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/10/08 19:40:16 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+static void	assign_stuff(double num1[2], double num2[2], t_fractal *frac)
+{
+	num1[0] = num2[0];
+	num1[1] = num2[1];
+	frac->iterations = MAX_ITER;
+	frac->mu = frac->iterations;
+}
 
 double	smooth_coloring(double *num, double x, double y, double k)
 {
@@ -20,10 +28,7 @@ double	smooth_coloring(double *num, double x, double y, double k)
 	int			i;
 
 	i = 0;
-	frac.iterations = MAX_ITER;
-	frac.mu = frac.iterations;
-	z_minus1[0] = num[0];
-	z_minus1[1] = num[1];
+	assign_stuff(z_minus1, num, &frac);
 	z.x = x;
 	z.y = y;
 	while (i++ < frac.iterations)

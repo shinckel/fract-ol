@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:05:53 by shinckel          #+#    #+#             */
-/*   Updated: 2023/10/08 14:32:52 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/10/08 19:32:23 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ void	draw_content(t_fractal *frac, int x, int y, int flag)
 {
 	int	tab;
 
-	tab	= 0;
+	tab = 0;
 	if (frac->i == 4)
-			frac->i = 0;
+		frac->i = 0;
 	if (!ft_strncmp(frac->name, "mandelbrot", 10))
 		frac->mu = mandelbrot(frac, x, y);
 	else if (!ft_strncmp(frac->name, "julia", 5)
@@ -75,7 +75,6 @@ void	initialize_params(t_fractal *frac, char *str)
 	frac->yarrow = 0;
 	frac->zoom = 1;
 	frac->radius = 3;
-	frac->iterations = 200;
 	frac->img = mlx_new_image(frac->mlx, WIDTH, HEIGHT);
 	frac->addr = mlx_get_data_addr(frac->img, &frac->bits_per_pixel,
 			&frac->line_length, &frac->endian);

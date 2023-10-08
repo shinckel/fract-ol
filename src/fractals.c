@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 17:33:54 by shinckel          #+#    #+#             */
-/*   Updated: 2023/10/08 14:31:32 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/10/08 18:44:19 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@ double	mandelbrot(t_fractal *frac, int x, int y)
 {
 	double		mu;
 
-	frac->c->mset[0] = (x + frac->xarrow) / frac->zoom * (0.47 + 2.0) / (WIDTH - 1) - 2.0;
-	frac->c->mset[1] = (y + frac->yarrow) / frac->zoom * (1.12 + 1.12) / (WIDTH - 1) - 1.12;
+	frac->c->mset[0] = (x + frac->xarrow)
+		/ frac->zoom * (0.47 + 2.0) / (WIDTH - 1) - 2.0;
+	frac->c->mset[1] = (y + frac->yarrow)
+		/ frac->zoom * (1.12 + 1.12) / (WIDTH - 1) - 1.12;
 	mu = smooth_coloring(frac->c->mset, 0, 0, 0);
 	return (mu);
 }

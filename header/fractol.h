@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:18:55 by shinckel          #+#    #+#             */
-/*   Updated: 2023/10/08 14:27:25 by shinckel         ###   ########.fr       */
+/*   Updated: 2023/10/08 19:31:00 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define WIDTH 1280
 # define HEIGHT 1280
 // iterations
-# define MAX_ITER 10
+# define MAX_ITER 150
 // hooks
 # define ESC_KEY 65307
 # define LEFT 65361
@@ -85,6 +85,7 @@ typedef struct s_fractal {
 	int			line_length;
 	int			endian;
 	int			iterations;
+	double		z_minus1[2];
 	t_complex	*c;
 }	t_fractal;
 
@@ -102,6 +103,7 @@ void	key_hook(int keycode, t_fractal *frac);
 int		handle_key(int keycode, t_fractal *frac);
 void	key_fractal_utils(int keycode, t_fractal *frac);
 int		handle_mouse(int keycode, int x, int y, t_fractal *frac);
+// int		handle_mouse(int keycode, t_fractal *frac);
 /* colors */
 // double	smooth_coloring(t_complex *c, double x, double y, double k);
 double	smooth_coloring(double *num, double x, double y, double k);
